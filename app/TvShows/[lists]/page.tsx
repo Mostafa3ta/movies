@@ -14,7 +14,7 @@ interface ParamsProps {
 
 async function movieListNum({ params, searchParams }: ParamsProps) {
 
-  const listType = params.lists
+  const listType = params?.lists
   const pageNum = (searchParams?.page > 500) ? 500 : searchParams?.page || 1
 
 

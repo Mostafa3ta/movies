@@ -10,13 +10,13 @@ export const metadata = {
 }
 
 interface ParamsProps {
-    params: { lists: string, then: any, catch: any, finally: any, [Symbol.toStringTag]: string },
+    params: { lists: string},
     searchParams: { page: number }
 }
 
 async function movieListNum({ params, searchParams }: ParamsProps) {
 
-    const listType = params.lists
+    const listType = params?.lists
     const pageNum = (searchParams?.page > 500) ? 500 : searchParams?.page || 1
 
     const movies = await fetchMoviesLists({ listType, pageNum })
