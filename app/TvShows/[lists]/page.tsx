@@ -8,13 +8,13 @@ export const metadata = {
   title: "Tv Shows Lists",
 }
 interface ParamsProps {
-  params: { lists: string },
+  params: Promise<{ lists: string }>;
   searchParams: { page: number }
 }
 
 async function movieListNum({ params, searchParams }: ParamsProps) {
 
-  const listType = params?.lists
+  const listType = (await params)?.lists
   const pageNum = (searchParams?.page > 500) ? 500 : searchParams?.page || 1
 
 
