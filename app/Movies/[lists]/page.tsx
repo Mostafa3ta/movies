@@ -10,7 +10,7 @@ export const metadata = {
 }
 
 interface ParamsProps {
-    params: { lists: string, listPage: number, },
+    params: { lists: string, then: any, catch: any, finally: any, [Symbol.toStringTag]: string },
     searchParams: { page: number }
 }
 
