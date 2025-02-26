@@ -12,8 +12,8 @@ export default function NavBar({ MoviesLinks, ShowsLinks }: any) {
   const pathname = usePathname()
   const [activeTap, setActiveTap] = useState<string>('movies')
   const [toggleCollapse, setToggleCollapse] = useState<boolean>(false)
-  console.log(toggleCollapse);
-  console.log(pathname);
+  // console.log(toggleCollapse);
+  // console.log(pathname);
 
   useEffect(() => {
     setToggleCollapse(false)

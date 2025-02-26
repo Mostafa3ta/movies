@@ -9,7 +9,7 @@ import { imgBaseUrl } from '../constants'
 
 export default async function HeroCardInfo({ desc, title, id, image, btnText, btnStyle }: { desc: string, title: string, image?: string, btnText?: string, btnStyle?: string, id?: string }) {
     const movieInfo = await fetchMovieDetails({ MovieID: Number(id) })
-    console.log(imgBaseUrl + image);
+    // console.log(imgBaseUrl + image);
     
 
     return (<>

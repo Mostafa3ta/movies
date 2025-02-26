@@ -12,7 +12,7 @@ import SeasonsEpisodes from './SeasonsEpisodes'
 export default async function MovieCard({ movie, pageLink, show = false }: { movie: any, pageLink: string, show?: boolean }) {
     const details = await Promise.all(show === false ? [fetchMovieDetails({ MovieID: movie.id })] : [fetchShowDetails({ ShowId: movie.id })])
     // console.log(movie);
-    console.log(details);
+    // console.log(details);
 
     return (
         <Link className='group text-center my-2' key={movie?.id} href={`${pageLink}/?id=${movie?.id}`}>

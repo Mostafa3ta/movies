@@ -1,13 +1,11 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { imgBaseUrl } from '../constants'
 import GridContainer from './defaults/GridContainer'
 import CustomImg from './defaults/CustomImg'
 import { Season, SeasonEpisode } from '../types'
 import Heading from './defaults/Heading'
 
-export default function Episodes({ SeasonDetails, ShowId, EpisodeDetails }: { SeasonDetails: Season, ShowId: string, EpisodeDetails?: any }) {
+export default function Episodes({ SeasonDetails, ShowId, EpisodeDetails }: { SeasonDetails: Season, ShowId: number, EpisodeDetails?: any }) {
 
     return <>
         <Heading center title={`Season ${SeasonDetails.season_number} Episodes`} />

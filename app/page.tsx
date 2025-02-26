@@ -3,7 +3,7 @@ import { Heading, Hero, Hr, Similar } from "./components";
 
 export default async function Home() {
   const cardItems = await fetchShowsLists({ listType: 'Trending', pageNum: 1 })
-  console.log(cardItems);
+  // console.log(cardItems);
   
 
   return (

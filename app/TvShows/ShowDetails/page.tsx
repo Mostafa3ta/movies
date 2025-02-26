@@ -13,18 +13,18 @@ export const metadata = {
 }
 
 interface ParamsProps {
-    searchParams: { id: number }
+    searchParams: Promise<{ id: number }>
 }
 
 async function ShowDetails({ searchParams }: ParamsProps) {
 
-    const ShowId: number = searchParams.id
+    const ShowId: number = (await searchParams)?.id
     const ShowDetails: TVShowDetails = await fetchShowDetails({ ShowId })
     const Cast: Credits = await fetchShowCast({ ShowId })
     const Recommend: TVShowResponse = await fetchShowRecommend({ ShowId })
     const Simi: TVShowResponse = await fetchShowSimilar({ ShowId })
     // console.log(ShowDetails);
-    console.log(Cast);
+    // console.log(Cast);
 
 
     return <>

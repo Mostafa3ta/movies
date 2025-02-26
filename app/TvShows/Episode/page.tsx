@@ -10,11 +10,20 @@ export const metadata = {
     title: "Show Episode",
 }
 
-async function EpisodeDetails({ searchParams }: { searchParams: any }) {
+interface searchParamsProps {
+    searchParams: Promise<{
+        id: number;
+        season: number;
+        episode: number;
+    }>;
 
-    const ShowId = searchParams?.id
-    const seasonNum = searchParams?.season
-    const episodeNum = searchParams?.episode
+}
+
+async function EpisodeDetails({ searchParams }: searchParamsProps) {
+
+    const ShowId = (await searchParams)?.id
+    const seasonNum = (await searchParams)?.season
+    const episodeNum = (await searchParams)?.episode
 
     const ShowDetails = await fetchShowDetails({ ShowId })
     const EpisodeDetails = await fetchEpisodeDetails({ ShowId, seasonNum, episodeNum })

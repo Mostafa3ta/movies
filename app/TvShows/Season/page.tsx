@@ -13,21 +13,22 @@ export const metadata = {
 }
 
 interface searchParamsProps {
-    searchParams: {
-        showId: string;
+    searchParams: Promise<{
+        id: number;
         season: number;
-    }
+    }>;
+
 }
 
-export default async function SeasonDetails({ searchParams }: any) {
+export default async function SeasonDetails({ searchParams }: searchParamsProps) {
 
-    const ShowId = searchParams?.id
-    const seasonNum = searchParams?.season
+    const ShowId = (await searchParams)?.id
+    const seasonNum = (await searchParams)?.season
 
     const ShowDetails = await fetchShowDetails({ ShowId })
     const SeasonDetails = await fetchSeasonDetails({ ShowId, seasonNum })
     const Cast = await fetchSeasonCast({ ShowId, seasonNum })
-    console.log(SeasonDetails);
+    // console.log(SeasonDetails);
 
     return <>
 
@@ -77,7 +78,7 @@ export default async function SeasonDetails({ searchParams }: any) {
 
         {/* All Seasons */}
         <div className='mx-4'>
-        <Seasons ShowId={ShowId} ShowDetails={ShowDetails} withHr={false} />
+            <Seasons ShowId={ShowId} ShowDetails={ShowDetails} withHr={false} />
         </div>
     </>
 }
