@@ -9,13 +9,13 @@ export const metadata = {
 }
 interface ParamsProps {
   params: Promise<{ lists: string }>;
-  searchParams: { page: number }
+  searchParams: Promise<{ page: number }>;
 }
 
 async function movieListNum({ params, searchParams }: ParamsProps) {
 
   const listType = (await params)?.lists
-  const pageNum = (searchParams?.page > 500) ? 500 : searchParams?.page || 1
+  const pageNum = ((await searchParams)?.page > 500) ? 500 : (await searchParams)?.page || 1
 
 
   const TvShows = await fetchShowsLists({ listType, pageNum })
