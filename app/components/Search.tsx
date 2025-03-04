@@ -9,14 +9,14 @@ import { searchResults, updateSearchParams } from "../api";
 import CustomImg from "./defaults/CustomImg";
 import { TbMovie } from "react-icons/tb";
 import { MdOutlineLiveTv } from "react-icons/md";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const Search = () => {
   const [active, setActive] = useState(false);
   const [loading, setLoading] = useState(true);
   const [Results, setResults] = useState<any>([])
   const outsideREF = useRef<HTMLDivElement | null>(null);
-  const searchParams = new URLSearchParams(window.location.search);
+  const searchParams = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
   const router = useRouter()
   const pathName = usePathname()
   const [query, setQuery] = useState(searchParams.get("query") || "");
@@ -30,10 +30,9 @@ const Search = () => {
 
   const handleUpdateParams = (e: { value: string }) => {
     if (pathName === "/search") {
-      const searchParams = new URLSearchParams(window.location.search);
       searchParams.set('page', '1');
       searchParams.set('query', e.value.toLowerCase());
-      const newPathName = `${window.location.pathname}?${searchParams.toString()}`;
+      const newPathName = `${typeof window !== 'undefined' ? window.location.pathname : ''}?${searchParams.toString()}`;
       router.push(newPathName);
       return
     }
@@ -42,11 +41,11 @@ const Search = () => {
   }
 
   useEffect(() => {
-    window.addEventListener("click", (e) => {
+    typeof window !== 'undefined' ? window.addEventListener("click", (e) => {
       if (outsideREF.current && !outsideREF.current.contains(e.target as Node | null)) {
         setActive(false);
       }
-    });
+    }) : null
   });
 
   useEffect(() => {
