@@ -52,10 +52,6 @@ export default async function SeasonDetails({ searchParams }: searchParamsProps)
                 <DetailsLine noLine text="Air Date" value={SeasonDetails?.air_date === "" ?
                     <span>Unknown</span> : <span className='px-2'>{SeasonDetails?.air_date}</span>
                 } />
-                {/* <DetailsLine noLine text="Runtime" value={<>
-                        <span>{ShowDetails.runtime}</span>
-                        <span className="text-red-300 ps-1"> mins </span>
-                    </>} /> */}
 
             </MotionItem>
         </GridContainer>
@@ -69,17 +65,12 @@ export default async function SeasonDetails({ searchParams }: searchParamsProps)
 
         {/* season cast */}
         {Cast?.cast?.length === 0 && Cast?.crew?.length === 0 ? (<Empty message='No Cast To Show' />) : (
-            <div className="my-3 mx-8">
-                <Heading center title="Cast" />
-                <CastDetails Cast={Cast?.cast?.length !== 0 ? Cast.cast : Cast.crew} />
-            </div>
+            <CastDetails Cast={Cast?.cast?.length !== 0 ? Cast.cast : Cast.crew} />
         )}
         <Hr />
 
         {/* All Seasons */}
-        <div className='mx-4'>
-            <Seasons ShowId={ShowId} ShowDetails={ShowDetails} withHr={false} />
-        </div>
+        <Seasons ShowId={ShowId} ShowDetails={ShowDetails} withHr={false} />
     </>
 }
 

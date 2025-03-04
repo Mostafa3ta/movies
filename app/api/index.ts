@@ -1,6 +1,6 @@
-import { options } from "../constants";
+import { options } from "../constants"
 
-const fetchFn = ({ url }: { url: string }) => {
+export const fetchFn = ({ url }: { url: string }) => {
     return fetch(url, {
         ...options,
         next: {
@@ -9,36 +9,30 @@ const fetchFn = ({ url }: { url: string }) => {
     }).then(res => res.json())
 }
 
+export const updateSearchParams = (type: string, value: string) => {
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set(type, value);
+    const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
+    return newPathname;
+};
+
+export async function searchResults({ value, pageNum }: { value: string, pageNum: number }) {
+    const newValue = value.split(' ').join('%20')
+    return await fetchFn({ url: `https://api.themoviedb.org/3/search/multi?query=${newValue}&page=${pageNum}` })
+}
+
+
+export async function fetchGeneres({ Type }: { Type: string }) {
+    return await fetchFn({ url: `https://api.themoviedb.org/3/genre/${Type}/list?language=en` })
+}
 // Movies Pages Lists
 
-
-// export async function fetchTrendMovies({ pageNum }: { pageNum: number }) {
-//     return await fetchFn({ url: `https://api.themoviedb.org/3/trending/movie/day?page=${pageNum}` })
-// }
-
-// export async function fetchAllMovies({ pageNum }: { pageNum: number }) {
-//     return await fetchFn({ url: `https://api.themoviedb.org/3/discover/movie?page=${pageNum}` })
-// }
 
 export async function fetchMoviesLists({ listType, pageNum }: { listType: string, pageNum: number }) {
     return Promise.all(listType === 'Trending' ? [fetchFn({ url: `https://api.themoviedb.org/3/trending/movie/day?page=${pageNum}` })] : listType === 'AllMovies' ? [fetchFn({ url: `https://api.themoviedb.org/3/discover/movie?page=${pageNum}` })] : [fetchFn({ url: `https://api.themoviedb.org/3/movie/${listType}?page=${pageNum}` })])
 }
 
-// Shows Pages Lists
-
-
-// export async function fetchAllShows({ pageNum }: { pageNum: number }) {
-//     return await fetchFn({ url: `https://api.themoviedb.org/3/discover/tv?page=${pageNum}` })
-// }
-
-// export async function fetchTrendShows({ pageNum }: { pageNum: number }) {
-//     return await fetchFn({ url: `https://api.themoviedb.org/3/trending/tv/day?page=${pageNum}` })
-// }
-export async function fetchShowsLists({ listType, pageNum }: { listType: string, pageNum: number }) {
-    return Promise.all(listType === 'Trending' ? [fetchFn({ url: `https://api.themoviedb.org/3/trending/tv/day?page=${pageNum}` })] : listType === 'AllShows' ? [fetchFn({ url: `https://api.themoviedb.org/3/discover/tv?page=${pageNum}` })] : [fetchFn({ url: `https://api.themoviedb.org/3/tv/${listType}?page=${pageNum}` })])
-}
 // Movies Details
-
 export async function fetchMoviesDetails({ MoviesIDs }: { MoviesIDs: number[] }) {
     return Promise.all(MoviesIDs.map((id) => fetchMovieDetails({ MovieID: id })))
 }
@@ -60,6 +54,9 @@ export async function fetchMovieSimilar({ MovieID }: { MovieID: number }) {
 }
 
 // Shows Details
+export async function fetchShowsLists({ listType, pageNum }: { listType: string, pageNum: number }) {
+    return Promise.all(listType === 'Trending' ? [fetchFn({ url: `https://api.themoviedb.org/3/trending/tv/day?page=${pageNum}` })] : listType === 'AllShows' ? [fetchFn({ url: `https://api.themoviedb.org/3/discover/tv?page=${pageNum}` })] : [fetchFn({ url: `https://api.themoviedb.org/3/tv/${listType}?page=${pageNum}` })])
+}
 export async function fetchShowsDetails({ ShowsIDs }: { ShowsIDs: number[] }) {
     return Promise.all(ShowsIDs.map((id) => fetchShowDetails({ ShowId: id })))
 }
@@ -76,8 +73,6 @@ export async function fetchShowRecommend({ ShowId }: { ShowId: number }) {
 }
 
 // Season Details
-
-
 export async function fetchShowSimilar({ ShowId }: { ShowId: number }) {
     return await fetchFn({ url: `https://api.themoviedb.org/3/tv/${ShowId}/recommendations` })
 }
@@ -91,8 +86,6 @@ export async function fetchSeasonCast({ ShowId, seasonNum }: { ShowId: number, s
 }
 
 // Episode Details
-
-
 export async function fetchEpisodeDetails({ ShowId, seasonNum, episodeNum }: { ShowId: number, seasonNum: number, episodeNum: number }) {
     return await fetchFn({ url: `https://api.themoviedb.org/3/tv/${ShowId}/season/${seasonNum}/episode/${episodeNum}` })
 }
@@ -100,15 +93,3 @@ export async function fetchEpisodeDetails({ ShowId, seasonNum, episodeNum }: { S
 export async function fetchEpisodeCast({ ShowId, seasonNum, episodeNum }: { ShowId: number, seasonNum: number, episodeNum: number }) {
     return await fetchFn({ url: `https://api.themoviedb.org/3/tv/${ShowId}/season/${seasonNum}/episode/${episodeNum}/credits` })
 }
-
-// export async function searchResults(value, pageNum) {
-//     const newValue = value.split(' ').join('%20')
-//     const response = await fetch(`https://api.themoviedb.org/3/search/multi?query=${newValue}&page=${pageNum}`, options, {
-//         next: {
-//             revalidate: 300
-//         }
-//     })
-//     const Results = await response.json()
-
-//     return Results
-// }

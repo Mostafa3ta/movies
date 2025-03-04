@@ -14,7 +14,7 @@ export default async function HeroCardInfo({ desc, title, id, image, btnText, bt
 
     return (<>
         <section className='relative rounded-2xl h-full overflow-hidden w-full'>
-            <Image src={imgBaseUrl + image} fill alt={title}
+            <Image loading='lazy' src={imgBaseUrl + image} fill alt={title}
                 className='object-cover overflow-hidden rounded-xl w-full h-full' />
         </section>
         <MotionItem

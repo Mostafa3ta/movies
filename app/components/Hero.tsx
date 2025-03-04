@@ -8,7 +8,7 @@ export default async function Hero() {
     
     const cardItems = await fetchMoviesLists({ listType: 'Trending', pageNum: 1 })
     const moviesDetails = await fetchMoviesDetails({ MoviesIDs: cardItems[0]?.results.map((item: any) => item.id) })
-    console.log(moviesDetails);
+    // console.log(moviesDetails);
     // console.log(cardItems?.results)
 
     return (

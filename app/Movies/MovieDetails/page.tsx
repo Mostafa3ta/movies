@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-
 import React from 'react'
 import { fetchMovieDetails, fetchMovieCast, fetchMovieRecommend, fetchMovieSimilar } from '@/app/api';
 import { CastDetails, CustomImg, DetailsLine, Empty, GridContainer, Heading, Hr, MotionItem, Rating, Similar } from '@/app/components';
@@ -72,26 +70,17 @@ async function MovieDetails({ searchParams }: searchParamsProps) {
 
                 {/* Cast */}
                 {Cast.cast.length === 0 && Cast.crew.length === 0 ? (<Empty message='No Cast To Show' />) : (
-                    <div className="my-3 mx-8">
-                        <Heading center title="Cast" />
-                        <CastDetails Cast={Cast.cast.length !== 0 ? Cast.cast : Cast.crew} />
-                    </div>
+                    <CastDetails Cast={Cast.cast.length !== 0 ? Cast.cast : Cast.crew} />
                 )}
                 <Hr />
 
                 {/* Similar Movies */}
-                <div className="my-3 justify-center mx-2 md:mx-8">
-                    {Simi.results.length === 0 && Recommend.results.length === 0 ? (<Empty message="No Similar Movies To Show" />) : (
-                        <>
-                            <Heading center title="Similar Movies" />
-                            <Similar
-                                Recommend={Recommend?.results?.length !== 0 ? Recommend : Simi}
-                                detailsLink={`/Movies/MovieDetails`}
-                            />
-                        </>
-                    )}
-                </div>
-
+                {Simi.results.length === 0 && Recommend.results.length === 0 ? (<Empty message="No Similar Movies To Show" />) : (
+                    <Similar
+                        Recommend={Recommend?.results?.length !== 0 ? Recommend : Simi}
+                        detailsLink={`/Movies/MovieDetails`}
+                    />
+                )}
             </>
     )
 }

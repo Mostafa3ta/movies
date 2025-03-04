@@ -6,7 +6,7 @@ export default function MaxWidthWrapper({ className, children, noPadding, custom
         <section className={cn('w-full max-w-[1375px] px-5 md:px-10',
             className || '',
             { 'py-0': noPadding && !customPadding },
-            { 'py-8': !noPadding && !customPadding },
+            { 'py-4 md:py-8': !noPadding && !customPadding },
             customPadding
         )}>
             {children}

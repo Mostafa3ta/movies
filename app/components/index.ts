@@ -11,7 +11,7 @@ import GridContainer from "./defaults/GridContainer";
 import NavLink from "./nav/NavLink";
 import Logo from "./defaults/Logo";
 import MaxWidthWrapper from "./defaults/MaxWidthWrapper";
-import CustomBtn from "./defaults/CustomBtn";
+import CustomBtn from "./defaults/CustomPagesBtn";
 import Spinner from "./defaults/Spinner";
 import Hero from "./Hero";
 import SwiperCards from "./SwiperCards";
@@ -26,7 +26,7 @@ import DetailsLine from './defaults/DetailsLine'
 import Hr from './defaults/Hr'
 import MovieCard from './MovieCard'
 import HeroCardInfo from './HeroCardInfo'
-
+import Search from './Search'
 
 export {
     NavBar,
@@ -57,4 +57,5 @@ export {
     DetailsLine,
     Hr,
     Footer,
+    Search,
 }

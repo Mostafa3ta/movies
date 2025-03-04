@@ -68,17 +68,12 @@ async function EpisodeDetails({ searchParams }: searchParamsProps) {
 
         {/* season cast */}
         {EpisodeDetails?.guest_stars?.length === 0 ? (<Empty message='No Cast To Show' />) : (
-            <div className="my-3 mx-8">
-                <Heading center title="Cast" />
-                <CastDetails Cast={EpisodeDetails?.guest_stars} />
-            </div>
+            <CastDetails Cast={EpisodeDetails?.guest_stars} />
         )}
         <Hr />
 
         {/* All Seasons */}
-        <div className='mx-4'>
-            <Seasons ShowId={ShowId} ShowDetails={ShowDetails} withHr={false} />
-        </div>
+        <Seasons ShowId={ShowId} ShowDetails={ShowDetails} withHr={false} />
     </>
 }
 

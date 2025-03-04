@@ -7,8 +7,10 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Logo from '../defaults/Logo'
 import { CgFormatJustify } from 'react-icons/cg'
+import { MoviesLinks, ShowsLinks } from '@/app/constants'
+import { IoClose } from 'react-icons/io5'
 
-export default function NavBar({ MoviesLinks, ShowsLinks }: any) {
+export default function NavBar() {
   const pathname = usePathname()
   const [activeTap, setActiveTap] = useState<string>('movies')
   const [toggleCollapse, setToggleCollapse] = useState<boolean>(false)
@@ -22,12 +24,12 @@ export default function NavBar({ MoviesLinks, ShowsLinks }: any) {
   return (
     <nav className="bg-white mb-10 transition-all ease-in duration-300 rounded-md border-gray-200 lg:hidden dark:bg-black/30">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-      <Logo />
-         <button onClick={() => setToggleCollapse(!toggleCollapse)} type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-          <CgFormatJustify className='w-14 h-14' />
+        <Logo />
+        <button onClick={() => setToggleCollapse(!toggleCollapse)} type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+          {toggleCollapse ? <IoClose className='w-14 h-14' /> : <CgFormatJustify className='w-14 h-14' />}
         </button>
       </div>
-      <div className={` w-1/2 mx-auto transition-all ease-in duration-300 ${toggleCollapse ? 'block' : 'hidden'}`}>
+      <div className={` w-1/2 md:w-1/3 mx-auto transition-all ease-in duration-300 ${toggleCollapse ? 'block' : 'hidden'}`}>
         <div className="mx-auto mt-6 w-full border-gray-200 dark:border-neutral-700">
           <header className="flex w-full justify-evenly items-center" aria-label="Tabs" role="tablist" aria-orientation="horizontal">
             <button onClick={() => setActiveTap('movies')} type="button" className={`text-lg inline-flex items-center gap-x-2 border-b-2 border-transparent whitespace-nowrap text-gray-500 hover:text-fuchsia-600 focus:outline-none duration-200 focus:text-fuchsia-600 disabled:opacity-50 disabled:pointer-events-none dark:hover:text-fuchsia-500 ${activeTap === 'movies' ? 'font-semibold border-b-fuchsia-500 border-b-4 border-fuchsia-600 text-fuchsia-600 dark:text-neutral-200' : 'dark:text-neutral-400'}`}>

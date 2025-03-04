@@ -7,7 +7,6 @@ import Image from 'next/image';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import type SwiperType from 'swiper';
 import { imgBaseUrl } from '../constants';
-
 interface SwiperCardsProps {
     items: { card: ReactNode, src?: string }[],
     PaginationImages?: Boolean,
@@ -84,7 +83,7 @@ export default function SwiperCards({ items, PaginationImages, className, pauseO
                         // swiper?.autoplay.stop()
                     }} key={item} className={`${swiper?.realIndex === item && 'shadow-md border border-rose-500 opacity-90'} rounded-xl cursor-pointer hover:-translate-y-2 transition hover:shadow-md hover:opacity-90 duration-200 z-10 overflow-hidden max-w-lg w-full h-40 relative`}>
                         {swiper?.realIndex === item && swiper?.autoplay.running && (<div style={{ width: `${progress}%` }} className='absolute duration-200 w-0 inset-0 z-10 h-full bg-black/30'></div>)}
-                        {src && src !== '' ? <Image src={imgBaseUrl + src} fill alt={src} className='object-cover' /> : null}{''}
+                        {src && src !== '' ? <Image loading='lazy' src={imgBaseUrl + src} fill alt={src} className='object-cover' /> : null}{''}
                     </div>))}
             </div>
         </div>

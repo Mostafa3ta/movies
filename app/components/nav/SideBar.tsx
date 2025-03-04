@@ -11,8 +11,9 @@ import { FaArrowTrendUp } from 'react-icons/fa6'
 import Hr from '../defaults/Hr'
 import { TbMovie } from 'react-icons/tb'
 import MotionItem from '../defaults/MotionItem'
+import { MoviesLinks, ShowsLinks } from '@/app/constants'
 
-export default function SideBar({ MoviesLinks, ShowsLinks }: any) {
+export default function SideBar() {
   const [activeTap, setActiveTap] = useState<string>('movies')
 
   return (
