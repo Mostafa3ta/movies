@@ -20,7 +20,6 @@ export const MoviesLinks = [
     { name: 'Now Playing', link: '/Movies/now_playing/?page=1', icon: <FaPlayCircle /> },
     { name: 'Popular', link: '/Movies/popular/?page=1', icon: <FaFireAlt /> },
     { name: 'Top Rated', link: '/Movies/top_rated/?page=1', icon: <FaStar /> },
-    // { name: 'Filter By Genre', link: '/genre/AllMovies/?page=1', icon: <BiSearch /> },
 ]
 
 export const ShowsLinks = [
@@ -29,5 +28,4 @@ export const ShowsLinks = [
     { name: 'Airing Today', link: '/TvShows/airing_today/?page=1', icon: <FaPlayCircle /> },
     { name: 'On The Air', link: '/TvShows/on_the_air/?page=1', icon: <FaFireAlt /> },
     { name: 'Top Rated', link: '/TvShows/top_rated/?page=1', icon: <FaStar /> },
-    // { name: 'Filter By Genre', link: '/genre/AllShows/?page=1', icon: <BiSearch /> },
 ]
