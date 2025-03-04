@@ -3,7 +3,7 @@
 import React from 'react'
 import { fetchShowCast, fetchShowDetails, fetchShowRecommend, fetchShowSimilar } from '@/app/api';
 import { CastDetails, CustomImg, DetailsLine, Empty, GridContainer, Hr, MotionItem, Rating, Seasons, Similar } from '@/app/components';
-import { Credits,  TVShowDetails, TVShowResponse } from '@/app/types';
+import { Credits,  TVShowDetails } from '@/app/types';
 
 export const metadata = {
     title: "Tv Show Details",
@@ -15,11 +15,11 @@ interface ParamsProps {
 
 async function ShowDetails({ searchParams }: ParamsProps) {
 
-    const ShowId: number = (await searchParams)?.id
-    const ShowDetails: TVShowDetails = await fetchShowDetails({ ShowId })
-    const Cast: Credits = await fetchShowCast({ ShowId })
-    const Recommend: TVShowResponse = await fetchShowRecommend({ ShowId })
-    const Simi: TVShowResponse = await fetchShowSimilar({ ShowId })
+    const ShowId = (await searchParams)?.id
+    const ShowDetails = await fetchShowDetails({ ShowId })
+    const Cast = await fetchShowCast({ ShowId })
+    const Recommend = await fetchShowRecommend({ ShowId })
+    const Simi = await fetchShowSimilar({ ShowId })
 
     return <>
 
