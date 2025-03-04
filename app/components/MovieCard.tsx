@@ -9,8 +9,9 @@ import { fetchMovieDetails, fetchShowDetails } from '../api'
 import SeasonsEpisodes from './SeasonsEpisodes'
 import { TbMovie } from 'react-icons/tb'
 import { FaMasksTheater } from 'react-icons/fa6'
+import { Genre, Movie, TVShowDetails } from '../types'
 
-export default async function MovieCard({ movie, pageLink, show = false, isSearch = false }: { movie: any, pageLink?: string, show?: boolean, isSearch?: boolean }) {
+export default async function MovieCard({ movie, pageLink, show = false, isSearch = false }: { movie: Movie | TVShowDetails | any, pageLink?: string, show?: boolean, isSearch?: boolean }) {
     const details = movie?.media_type && movie?.media_type === "person" ? [] : await Promise.all(show === false ? [fetchMovieDetails({ MovieID: movie.id })] : [fetchShowDetails({ ShowId: movie.id })])
     return (
         <Link className={`group text-center my-2 ${movie?.media_type === "person" ? 'pointer-events-none' : ''}`} key={movie?.id} href={`${movie?.media_type === "person" ? '' : pageLink + '/?id=' + movie?.id}`}>
@@ -32,7 +33,7 @@ export default async function MovieCard({ movie, pageLink, show = false, isSearc
                                 <SeasonsEpisodes text="Episodes" value={details[0].number_of_episodes} />
                             </div> : null}
                             <div className="flex flex-wrap w-full gap-2 items-center mt-2 justify-center">
-                                {details[0]?.genres?.map((genre: any) => <p key={genre?.id} className="text-sm text-gray-200 bg-gray-500/80 py-1 px-2 rounded-full">{genre.name}</p>)}
+                                {details[0]?.genres?.map((genre: Genre) => <p key={genre?.id} className="text-sm text-gray-200 bg-gray-500/80 py-1 px-2 rounded-full">{genre.name}</p>)}
                             </div>
                         </MotionItem>
                     }

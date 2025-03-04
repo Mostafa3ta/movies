@@ -6,8 +6,8 @@ import Link from 'next/link'
 import { fetchMovieDetails } from '../api'
 import { imgBaseUrl } from '../constants'
 
-export default async function HeroCardInfo({ desc, title, id, image, btnText, btnStyle }: { desc: string, title: string, image?: string, btnText?: string, btnStyle?: string, id?: string }) {
-    const movieInfo = await fetchMovieDetails({ MovieID: Number(id) })
+export default async function HeroCardInfo({ desc, title, id, image, btnText, btnStyle }: { desc: string | null, title: string, image?: string | null | undefined, btnText?: string, btnStyle?: string, id: number  }) {
+    const movieInfo = await fetchMovieDetails({ MovieID: id })
 
     return (<>
         <section className='relative rounded-2xl h-full overflow-hidden w-full'>

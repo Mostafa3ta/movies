@@ -1,13 +1,13 @@
 interface Movie {
     adult: boolean;
-    backdrop_path: string | null; // Can be null
+    backdrop_path: string | null | undefined; // Can be null
     genre_ids: number[];
     id: number;
     original_language: string;
     original_title: string;
     overview: string | null; // Can be null
     popularity: number;
-    poster_path: string | null; // Can be null
+    poster_path: string | null | undefined; // Can be null
     release_date: string;
     title: string;
     video: boolean;
@@ -15,27 +15,59 @@ interface Movie {
     vote_count: number;
 }
 
-interface TVShow {
-    backdrop_path: string | null; // Can be null if there's no backdrop
+interface SearchMovie {
+    backdrop_path: string | null;
+    id: number;
+    title: string;
+    original_title: string;
+    overview: string;
+    poster_path: string | null;
+    media_type: "movie";
+    adult: boolean;
+    original_language: string;
+    genre_ids: number;
+    popularity: number;
+    release_date: string;
+    video: boolean;
+    vote_average: number;
+    vote_count: number;
+}
+
+interface SearchTVShow {
+    backdrop_path: string | null;
     id: number;
     name: string;
     original_name: string;
     overview: string;
-    poster_path: string | null; // Can be null if there's no poster
+    poster_path: string | null;
     media_type: "tv";
     adult: boolean;
     original_language: string;
-    genre_ids: number[];
+    genre_ids: number;
     popularity: number;
     first_air_date: string;
     vote_average: number;
     vote_count: number;
-    origin_country: string[];
+    origin_country: string;
 }
 
-interface TVShowResponse {
+interface SearchPerson {
+    id: number;
+    name: string;
+    original_name: string;
+    media_type: "person";
+    adult: boolean;
+    popularity: number;
+    gender: number; // 0: unknown, 1: female, 2: male
+    known_for_department: string;
+    profile_path: string | null;
+    known_for: Movie;
+}
+
+
+interface SearchResponse {
     page: number;
-    results: TVShow[];
+    results: (SearchMovie | SearchTVShow | SearchPerson)[];
     total_pages: number;
     total_results: number;
 }
@@ -223,8 +255,10 @@ interface Season {
 
 export type {
     CreatedBy,
-    TVShowResponse,
-    TVShow,
+    SearchResponse,
+    SearchMovie,
+    SearchTVShow,
+    SearchPerson,
     Movie,
     Genre,
     Network,
