@@ -2,11 +2,8 @@
 
 import React from 'react'
 import { fetchShowCast, fetchShowDetails, fetchShowRecommend, fetchShowSimilar } from '@/app/api';
-import Image from 'next/image';
-import { CastDetails, CustomImg, DetailsLine, Empty, GridContainer, Heading, Hr, MotionItem, Rating, Seasons, Similar, SwiperCards } from '@/app/components';
-import { imgBaseUrl } from '@/app/constants';
-import Link from 'next/link';
-import { Credits, Season, TVShowDetails, TVShowResponse } from '@/app/types';
+import { CastDetails, CustomImg, DetailsLine, Empty, GridContainer, Hr, MotionItem, Rating, Seasons, Similar } from '@/app/components';
+import { Credits,  TVShowDetails, TVShowResponse } from '@/app/types';
 
 export const metadata = {
     title: "Tv Show Details",
@@ -23,9 +20,6 @@ async function ShowDetails({ searchParams }: ParamsProps) {
     const Cast: Credits = await fetchShowCast({ ShowId })
     const Recommend: TVShowResponse = await fetchShowRecommend({ ShowId })
     const Simi: TVShowResponse = await fetchShowSimilar({ ShowId })
-    // console.log(ShowDetails);
-    // console.log(Cast);
-
 
     return <>
 

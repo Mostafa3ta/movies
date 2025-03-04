@@ -1,4 +1,4 @@
-import { GridContainer, Heading, LoadingSkelton } from '@/app/components'
+import { GridContainer, Heading } from '@/app/components'
 import { Skeleton } from '@/components/ui/skeleton'
 import React from 'react'
 

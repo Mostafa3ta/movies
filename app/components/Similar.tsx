@@ -1,13 +1,9 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
-import { imgBaseUrl } from '../constants'
-import CustomImg from './defaults/CustomImg'
 import SwiperCards from './SwiperCards'
 import MovieCard from './MovieCard'
 import Heading from './defaults/Heading'
 
-export default function Similar({ Recommend, Simi, detailsLink, showType = false, hideTitle = false }: { Recommend: any, Simi?: any, detailsLink: string, showType?: boolean, hideTitle?: boolean }) {
+export default function Similar({ Recommend, detailsLink, showType = false, hideTitle = false }: { Recommend: any, detailsLink: string, showType?: boolean, hideTitle?: boolean }) {
 
     return (
         <div className="my-3 md:mx-6 mx-2">

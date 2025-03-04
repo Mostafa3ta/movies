@@ -1,12 +1,11 @@
 "use client";
 import { AnimatePresence } from "framer-motion";
 import { SearchIcon, XIcon } from "lucide-react";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MotionItem from "./defaults/MotionItem";
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
-import Image from "next/image";
-import { fetchFn, searchResults, updateSearchParams } from "../api";
+import { searchResults, updateSearchParams } from "../api";
 import CustomImg from "./defaults/CustomImg";
 import { TbMovie } from "react-icons/tb";
 import { MdOutlineLiveTv } from "react-icons/md";
@@ -21,8 +20,6 @@ const Search = () => {
   const router = useRouter()
   const pathName = usePathname()
   const [query, setQuery] = useState(searchParams.get("query") || "");
-  console.log(pathName);
-
 
   async function finalResults({ value, pageNum }: { value: string, pageNum: number }) {
     setLoading(true)
@@ -46,7 +43,6 @@ const Search = () => {
 
   useEffect(() => {
     window.addEventListener("click", (e) => {
-      console.log(e.target, outsideREF.current);
       if (outsideREF.current && !outsideREF.current.contains(e.target as Node | null)) {
         setActive(false);
       }

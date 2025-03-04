@@ -1,12 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 
 import React from 'react'
-import Image from 'next/image';
-import { CastDetails, CustomImg, DetailsLine, Empty, Episodes, GridContainer, Heading, Hr, MotionItem, Rating, Seasons, SwiperCards } from '../../components';
+import { CastDetails, CustomImg, DetailsLine, Empty, Episodes, GridContainer, Hr, MotionItem, Rating, Seasons } from '../../components';
 import { fetchSeasonCast, fetchSeasonDetails, fetchShowDetails } from '@/app/api';
-import { imgBaseUrl } from '@/app/constants';
-import { Link } from 'lucide-react';
-import { Season, TVShowDetails } from '@/app/types';
 
 export const metadata = {
     title: "Show Season",
@@ -28,7 +24,6 @@ export default async function SeasonDetails({ searchParams }: searchParamsProps)
     const ShowDetails = await fetchShowDetails({ ShowId })
     const SeasonDetails = await fetchSeasonDetails({ ShowId, seasonNum })
     const Cast = await fetchSeasonCast({ ShowId, seasonNum })
-    // console.log(SeasonDetails);
 
     return <>
 

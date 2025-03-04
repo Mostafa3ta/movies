@@ -3,21 +3,15 @@ import React from 'react'
 import CustomImg from './defaults/CustomImg'
 import MotionItem from './defaults/MotionItem'
 import Rating from './defaults/Rating'
-import { FaPlay, FaPlayCircle, FaRegPlayCircle } from 'react-icons/fa'
+import { FaRegPlayCircle } from 'react-icons/fa'
 import { MdLiveTv, MdOutlineLiveTv } from 'react-icons/md'
 import { fetchMovieDetails, fetchShowDetails } from '../api'
-import DetailsLine from './defaults/DetailsLine'
 import SeasonsEpisodes from './SeasonsEpisodes'
 import { TbMovie } from 'react-icons/tb'
 import { FaMasksTheater } from 'react-icons/fa6'
 
 export default async function MovieCard({ movie, pageLink, show = false, isSearch = false }: { movie: any, pageLink?: string, show?: boolean, isSearch?: boolean }) {
-    // const isShow = show ? show : (movie?.media_type === "show" ? true : false)
-
     const details = movie?.media_type && movie?.media_type === "person" ? [] : await Promise.all(show === false ? [fetchMovieDetails({ MovieID: movie.id })] : [fetchShowDetails({ ShowId: movie.id })])
-    // console.log(movie);
-    // console.log(details);
-
     return (
         <Link className={`group text-center my-2 ${movie?.media_type === "person" ? 'pointer-events-none' : ''}`} key={movie?.id} href={`${movie?.media_type === "person" ? '' : pageLink + '/?id=' + movie?.id}`}>
             <div className={`w-full rounded-md overflow-hidden relative ${movie.media_type === "person" ? "" : "after:inset-0 after:absolute after:z-20 after:w-0 after:h-full after:bg-[#0f0f0f]/60 after:duration-200 group-hover:after:w-full"}`}>

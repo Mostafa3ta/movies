@@ -1,15 +1,8 @@
 'use client'
 import React, { useState } from 'react'
-import { BsFillPeopleFill } from 'react-icons/bs'
-import { FaFireAlt, FaHeart, FaPlayCircle, FaStar } from 'react-icons/fa'
-import { GoHomeFill } from 'react-icons/go'
-import { MdDashboard, MdLocalMovies, MdOutlineLiveTv } from 'react-icons/md'
 import NavLink from './NavLink'
-import { CgGames } from 'react-icons/cg'
 import Logo from '../defaults/Logo'
-import { FaArrowTrendUp } from 'react-icons/fa6'
 import Hr from '../defaults/Hr'
-import { TbMovie } from 'react-icons/tb'
 import MotionItem from '../defaults/MotionItem'
 import { MoviesLinks, ShowsLinks } from '@/app/constants'
 
@@ -17,7 +10,6 @@ export default function SideBar() {
   const [activeTap, setActiveTap] = useState<string>('movies')
 
   return (
-    // <div className='col-span-2'>
     <div className='py-5 w-full sticky inset-0 h-screen flex flex-col items-center '>
       <div className='mb-6'>
         <Logo />

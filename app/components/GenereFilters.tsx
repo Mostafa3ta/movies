@@ -1,8 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { fetchGeneres } from '../api'
 import { Genre } from '../types';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface GenereFiltersProps {
     genres: Genre[];

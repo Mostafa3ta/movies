@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
 import MotionItem from './defaults/MotionItem'
-import CustomColorBtn from './defaults/CustomColorBtn'
 import Rating from './defaults/Rating'
 import Link from 'next/link'
 import { fetchMovieDetails } from '../api'
@@ -9,8 +8,6 @@ import { imgBaseUrl } from '../constants'
 
 export default async function HeroCardInfo({ desc, title, id, image, btnText, btnStyle }: { desc: string, title: string, image?: string, btnText?: string, btnStyle?: string, id?: string }) {
     const movieInfo = await fetchMovieDetails({ MovieID: Number(id) })
-    // console.log(imgBaseUrl + image);
-    
 
     return (<>
         <section className='relative rounded-2xl h-full overflow-hidden w-full'>
@@ -29,11 +26,7 @@ export default async function HeroCardInfo({ desc, title, id, image, btnText, bt
                 </h2>
                 <Rating rate={movieInfo.vote_average.toString(10).split('').splice(0, 3).join('')} />
             </div>
-            {/* <div className='w-80 h-40 relative'>
-                <Image src={image} fill alt={title} className='object-contain' />
-            </div> */}
             <p className='text-sm pt-2 line-clamp-2 text-gray-200'>{desc}</p>
-            {/* <CustomColorBtn type='button' text={btnText} style={btnStyle} /> */}
         </MotionItem>
     </>
     )

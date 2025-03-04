@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Heading, MoviesWrapper } from '../../components';
-import { fetchGeneres, fetchShowsLists } from '@/app/api';
+import { fetchShowsLists } from '@/app/api';
 import { MdOutlineLiveTv } from 'react-icons/md';
 
 export const metadata = {
@@ -17,10 +17,6 @@ async function movieListNum({ params, searchParams }: ParamsProps) {
   const listType = (await params)?.lists
   const pageNum = ((await searchParams)?.page > 500) ? 500 : (await searchParams)?.page || 1
   const TvShows = await fetchShowsLists({ listType, pageNum })
-  const genres = await fetchGeneres({ Type: 'tv' })
-
-
-  // console.log(params, searchParams);
 
 
   return <>

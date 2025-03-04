@@ -11,7 +11,6 @@ export default async function page({ searchParams }: ParamsProps) {
   const Query = (await searchParams)?.query || ''
   const results = await searchResults({ value: Query, pageNum })
   console.log(pageNum);
-  // console.log(results);
 
 
   return (

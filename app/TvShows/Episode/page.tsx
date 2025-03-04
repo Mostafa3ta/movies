@@ -1,10 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
-
 import React from 'react'
-import Image from 'next/image';
-import { CastDetails, CustomImg, DetailsLine, Empty, Episodes, GridContainer, Heading, Hr, MotionItem, Rating, Seasons } from '../../components';
-import { fetchShowDetails, fetchSeasonDetails, fetchEpisodeDetails, fetchEpisodeCast } from '@/app/api';
-import { imgBaseUrl } from '@/app/constants';
+import { CastDetails, CustomImg, DetailsLine, Empty, Episodes, GridContainer,  Hr, MotionItem, Rating, Seasons } from '../../components';
+import { fetchShowDetails, fetchSeasonDetails, fetchEpisodeDetails } from '@/app/api';
 
 export const metadata = {
     title: "Show Episode",

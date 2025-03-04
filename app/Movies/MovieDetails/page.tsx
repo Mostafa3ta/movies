@@ -1,6 +1,6 @@
 import React from 'react'
 import { fetchMovieDetails, fetchMovieCast, fetchMovieRecommend, fetchMovieSimilar } from '@/app/api';
-import { CastDetails, CustomImg, DetailsLine, Empty, GridContainer, Heading, Hr, MotionItem, Rating, Similar } from '@/app/components';
+import { CastDetails, CustomImg, DetailsLine, Empty, GridContainer, Hr, MotionItem, Rating, Similar } from '@/app/components';
 
 export const metadata = {
     title: "Movie Details",
@@ -20,8 +20,6 @@ async function MovieDetails({ searchParams }: searchParamsProps) {
     const Cast = await fetchMovieCast({ MovieID })
     const Recommend = await fetchMovieRecommend({ MovieID })
     const Simi = await fetchMovieSimilar({ MovieID })
-    // console.log(movieDetails);
-    // console.log(Cast);
 
 
     return (

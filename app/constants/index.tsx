@@ -1,12 +1,7 @@
-import { BsFillPeopleFill } from 'react-icons/bs'
-import { FaFireAlt, FaHeart, FaPlayCircle, FaStar } from 'react-icons/fa'
-import { GoHomeFill } from 'react-icons/go'
-import { MdDashboard, MdLocalMovies, MdOutlineLiveTv } from 'react-icons/md'
-import { CgGames } from 'react-icons/cg'
+import { FaFireAlt, FaPlayCircle, FaStar } from 'react-icons/fa'
+import { MdOutlineLiveTv } from 'react-icons/md'
 import { FaArrowTrendUp } from 'react-icons/fa6'
 import { TbMovie } from 'react-icons/tb'
-import { SearchIcon } from "lucide-react";
-import { BiSearch } from "react-icons/bi";
 
 
 export const options = {

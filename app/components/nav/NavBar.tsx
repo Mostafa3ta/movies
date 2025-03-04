@@ -4,7 +4,6 @@ import Hr from '../defaults/Hr'
 import MotionItem from '../defaults/MotionItem'
 import NavLink from './NavLink'
 import { usePathname } from 'next/navigation'
-import Link from 'next/link'
 import Logo from '../defaults/Logo'
 import { CgFormatJustify } from 'react-icons/cg'
 import { MoviesLinks, ShowsLinks } from '@/app/constants'
@@ -14,8 +13,6 @@ export default function NavBar() {
   const pathname = usePathname()
   const [activeTap, setActiveTap] = useState<string>('movies')
   const [toggleCollapse, setToggleCollapse] = useState<boolean>(false)
-  // console.log(toggleCollapse);
-  // console.log(pathname);
 
   useEffect(() => {
     setToggleCollapse(false)

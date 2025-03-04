@@ -1,9 +1,7 @@
-import Image from 'next/image'
 import React from 'react'
-import { imgBaseUrl } from '../constants'
 import CustomImg from './defaults/CustomImg'
 import GridContainer from './defaults/GridContainer'
-import { CastMember, Credits, CrewMember } from '../types'
+import { CastMember, CrewMember } from '../types'
 import Heading from './defaults/Heading'
 
 export default function CastDetails({ Cast }: { Cast: CastMember[] | CrewMember[] }) {

@@ -22,12 +22,11 @@ export async function searchResults({ value, pageNum }: { value: string, pageNum
 }
 
 
-export async function fetchGeneres({ Type }: { Type: string }) {
-    return await fetchFn({ url: `https://api.themoviedb.org/3/genre/${Type}/list?language=en` })
-}
+// export async function fetchGeneres({ Type }: { Type: string }) {
+//     return await fetchFn({ url: `https://api.themoviedb.org/3/genre/${Type}/list?language=en` })
+// }
+
 // Movies Pages Lists
-
-
 export async function fetchMoviesLists({ listType, pageNum }: { listType: string, pageNum: number }) {
     return Promise.all(listType === 'Trending' ? [fetchFn({ url: `https://api.themoviedb.org/3/trending/movie/day?page=${pageNum}` })] : listType === 'AllMovies' ? [fetchFn({ url: `https://api.themoviedb.org/3/discover/movie?page=${pageNum}` })] : [fetchFn({ url: `https://api.themoviedb.org/3/movie/${listType}?page=${pageNum}` })])
 }
@@ -71,11 +70,11 @@ export async function fetchShowCast({ ShowId }: { ShowId: number }) {
 export async function fetchShowRecommend({ ShowId }: { ShowId: number }) {
     return await fetchFn({ url: `https://api.themoviedb.org/3/tv/${ShowId}/similar` })
 }
-
-// Season Details
 export async function fetchShowSimilar({ ShowId }: { ShowId: number }) {
     return await fetchFn({ url: `https://api.themoviedb.org/3/tv/${ShowId}/recommendations` })
 }
+
+// Season Details
 
 export async function fetchSeasonDetails({ ShowId, seasonNum }: { ShowId: number, seasonNum: number }) {
     return await fetchFn({ url: `https://api.themoviedb.org/3/tv/${ShowId}/season/${seasonNum}` })

@@ -11,7 +11,6 @@ export default function MoviesWrapper({ movies, pageLink, isShow, isSearch }: { 
             )}
         </GridContainer>
         {movies.total_pages > 1 && <PagesButtons movies={movies} />}
-        {/* <PaginationWithLinks  page={pageNum} totalCount={totalPages} pageSize={20} /> */}
 
     </>
 }

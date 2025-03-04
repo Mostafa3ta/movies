@@ -1,10 +1,7 @@
 import React from 'react';
 import { Empty, Heading, MoviesWrapper } from '@/app/components';
-import { fetchGeneres, fetchMoviesLists } from '@/app/api';
-import { BiMove, BiMovie } from 'react-icons/bi';
-import { MdLocalMovies } from 'react-icons/md';
+import { fetchMoviesLists } from '@/app/api';
 import { TbMovie } from 'react-icons/tb';
-import { Genre } from '@/app/types';
 
 export const metadata = {
     title: "Movies Lists",
@@ -19,8 +16,7 @@ async function movieListNum({ params, searchParams }: ParamsProps) {
     const listType = (await params)?.lists
     const pageNum = ((await searchParams)?.page > 500) ? 500 : (await searchParams)?.page || 1
     const movies = await fetchMoviesLists({ listType, pageNum })
-    const genres = await fetchGeneres({ Type: 'movie' })
-    // console.log(movies);
+    // const genres = await fetchGeneres({ Type: 'movie' })
 
 
 
