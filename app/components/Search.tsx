@@ -133,7 +133,9 @@ const Search = () => {
 
                     : (query !== '' && <p className="text-center text-white py-4">Sorry, No results found with "{query}"</p>)
                 )}
-              {Results?.total_pages > 1 && <Link href={`/search/?page=1&query=${query}`} className="m-4 flex justify-center hover:text-fuchsia-500 hover:underline duration-150">View More Results</Link>}
+              {Results?.total_pages > 1 && <div className="m-4 flex justify-center items-center">
+                <Link href={`/search/?page=1&query=${query}`} className="hover:text-fuchsia-500 hover:underline duration-150">View More Results</Link>
+              </div>}
             </MotionItem>
           )}
         </AnimatePresence>
