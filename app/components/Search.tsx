@@ -16,7 +16,7 @@ const Search = () => {
   const [loading, setLoading] = useState(true);
   const [Results, setResults] = useState<any>([])
   const outsideREF = useRef<HTMLDivElement | null>(null);
-  const searchParams = useSearchParams()
+  const searchParams = new URLSearchParams(window.location.search);
   const router = useRouter()
   const pathName = usePathname()
   const [query, setQuery] = useState(searchParams.get("query") || "");
