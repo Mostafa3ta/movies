@@ -79,7 +79,8 @@ const Search = () => {
       <XIcon
         className={`${query === '' ? 'hidden' : 'block hover:text-fuchsia-500'} absolute right-3 w-5 h-5 cursor-pointer duration-150}`}
         onClick={() => {
-          setQuery("");
+          handleUpdateParams({ value: "" });
+          setQuery('');
         }}
       />
 
