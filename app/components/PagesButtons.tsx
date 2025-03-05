@@ -37,7 +37,7 @@ export default function PagesButtons({ movies }: { movies: any }) {
             {/*  last page */}
             <div className={` flex items-center gap-x-1 ${totalPages || movies?.page === movies?.total_pages - 1 || movies?.page === (500 - 2) || movies?.page === (500 - 1) || movies?.page === 500 ? 'hidden' : ''}`}>
                 <span className="text-xs">•••</span>
-                <CustomPagesBtn onClick={() => handleUpdateParams((totalPages), (movies?.total_pages > 500 ? 500 : movies?.total_pages))} condition={(totalPages || movies?.page === 500)}>{movies?.total_pages}</CustomPagesBtn>
+                <CustomPagesBtn onClick={() => handleUpdateParams((totalPages), (movies?.total_pages > 500 ? 500 : movies?.total_pages))} condition={(totalPages || movies?.page === 500)}>{movies?.total_pages > 500 ? 500 : movies?.total_pages}</CustomPagesBtn>
             </div>
 
             <CustomPagesBtn onClick={() => handleUpdateParams((totalPages || movies?.page === 500), (movies?.page + 1))} condition={(totalPages || movies?.page === 500)}>

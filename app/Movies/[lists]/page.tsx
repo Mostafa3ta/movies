@@ -16,7 +16,7 @@ async function movieListNum({ params, searchParams }: ParamsProps) {
     const listType = (await params)?.lists
     const pageNum = ((await searchParams)?.page > 500) ? 500 : (await searchParams)?.page || 1
     const movies = await fetchMoviesLists({ listType, pageNum })
-    // const genres = await fetchGeneres({ Type: 'movie' })
+console.log(movies);
 
 
 
