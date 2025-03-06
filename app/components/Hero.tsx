@@ -7,7 +7,7 @@ import { Movie } from '../types'
 
 export default async function Hero() {
     
-    const cardItems = await fetchMoviesLists({ listType: 'Trending', pageNum: 1 })
+    const cardItems = await fetchMoviesLists({ listType: 'Trending', pageNum: 2 })
     
 
     return (
