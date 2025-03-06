@@ -27,7 +27,6 @@ async function EpisodeDetails({ searchParams }: searchParamsProps) {
     const ShowDetails = await fetchShowDetails({ ShowId })
     const EpisodeDetails = await fetchEpisodeDetails({ ShowId, seasonNum, episodeNum })
     const SeasonDetails = await fetchSeasonDetails({ ShowId, seasonNum })
-    console.log(EpisodeDetails);
 
 
     return <>

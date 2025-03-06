@@ -12,7 +12,6 @@ interface searchParamsProps {
         id: number;
         show: boolean;
     }>;
-
 }
 
 async function MovieDetails({ searchParams }: searchParamsProps) {
