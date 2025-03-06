@@ -15,7 +15,7 @@ export default async function HeroCardInfo({ desc, title, id, image, btnText, bt
                 className='object-cover overflow-hidden rounded-xl w-full h-full' />
         </section>
         <MotionItem
-            initial={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0, transition: { duration: 1 } }}
             className='gap-4 p-4 absolute shadow-lg overflow-hidden h-[40%] w-[90%] bg-black/50 left-5 bottom-5 justify-end'>
             <div className='flex w-fit flex-col overflow-hidden'>
