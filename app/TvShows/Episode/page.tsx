@@ -66,13 +66,13 @@ async function EpisodeDetails({ searchParams }: searchParamsProps) {
         <Episodes SeasonDetails={SeasonDetails} ShowId={ShowId} />
         <Hr />
 
-        <VideoPlayer isShow={true} id={ShowDetails?.id} season={EpisodeDetails?.season_number} episode={EpisodeDetails?.episode_number} show={show} />
-
-        <Hr />
         {/* season cast */}
         {EpisodeDetails?.guest_stars?.length === 0 ? (<Empty message='No Cast To Show' />) : (
             <CastDetails Cast={EpisodeDetails?.guest_stars} />
         )}
+        <Hr />
+
+        <VideoPlayer isShow={true} id={ShowDetails?.id} season={EpisodeDetails?.season_number} episode={EpisodeDetails?.episode_number} show={show} />
         <Hr />
 
         {/* All Seasons */}
