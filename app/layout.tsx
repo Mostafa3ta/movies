@@ -56,7 +56,7 @@ export default function RootLayout({
           <div className="bg-black/30 text-gray-50 hidden lg:block lg:justify-center lg:col-span-2">
             <SideBar />
           </div>
-          <MaxWidthWrapper className="col-span-full lg:col-span-10">
+          <MaxWidthWrapper className="col-span-full customScrollBar lg:col-span-10">
             <NavBar />
             <Search />
             {children}

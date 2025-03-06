@@ -1,6 +1,7 @@
 import React from 'react'
 import { fetchMovieDetails, fetchMovieCast, fetchMovieRecommend, fetchMovieSimilar } from '@/app/api';
 import { CastDetails, CustomImg, DetailsLine, Empty, GridContainer, Hr, MotionItem, Rating, Similar } from '@/app/components';
+import VideoPlayer from '@/app/components/VideoPlayer';
 
 export const metadata = {
     title: "Movie Details",
@@ -9,6 +10,7 @@ export const metadata = {
 interface searchParamsProps {
     searchParams: Promise<{
         id: number;
+        show: boolean;
     }>;
 
 }
@@ -16,6 +18,8 @@ interface searchParamsProps {
 async function MovieDetails({ searchParams }: searchParamsProps) {
 
     const MovieID = (await searchParams)?.id
+    const show = (await searchParams)?.show
+
     const movieDetails = await fetchMovieDetails({ MovieID })
     const Cast = await fetchMovieCast({ MovieID })
     const Recommend = await fetchMovieRecommend({ MovieID })
@@ -65,11 +69,13 @@ async function MovieDetails({ searchParams }: searchParamsProps) {
 
                 <DetailsLine className="my-8 text-center justify-center items-start" text="Overview" value={movieDetails.overview} />
 
-
                 {/* Cast */}
                 {Cast.cast.length === 0 && Cast.crew.length === 0 ? (<Empty message='No Cast To Show' />) : (
                     <CastDetails Cast={Cast.cast.length !== 0 ? Cast.cast : Cast.crew} />
                 )}
+                <Hr />
+
+                <VideoPlayer id={movieDetails.id} show={show} />
                 <Hr />
 
                 {/* Similar Movies */}

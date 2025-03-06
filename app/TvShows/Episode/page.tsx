@@ -1,6 +1,7 @@
 import React from 'react'
-import { CastDetails, CustomImg, DetailsLine, Empty, Episodes, GridContainer,  Hr, MotionItem, Rating, Seasons } from '../../components';
+import { CastDetails, CustomImg, DetailsLine, Empty, Episodes, GridContainer, Hr, MotionItem, Rating, Seasons } from '../../components';
 import { fetchShowDetails, fetchSeasonDetails, fetchEpisodeDetails } from '@/app/api';
+import VideoPlayer from '@/app/components/VideoPlayer';
 
 export const metadata = {
     title: "Show Episode",
@@ -11,6 +12,7 @@ interface searchParamsProps {
         id: number;
         season: number;
         episode: number;
+        show: boolean;
     }>;
 
 }
@@ -20,10 +22,13 @@ async function EpisodeDetails({ searchParams }: searchParamsProps) {
     const ShowId = (await searchParams)?.id
     const seasonNum = (await searchParams)?.season
     const episodeNum = (await searchParams)?.episode
+    const show = (await searchParams)?.show
 
     const ShowDetails = await fetchShowDetails({ ShowId })
     const EpisodeDetails = await fetchEpisodeDetails({ ShowId, seasonNum, episodeNum })
     const SeasonDetails = await fetchSeasonDetails({ ShowId, seasonNum })
+    console.log(EpisodeDetails);
+
 
     return <>
 
@@ -61,7 +66,9 @@ async function EpisodeDetails({ searchParams }: searchParamsProps) {
         <Episodes SeasonDetails={SeasonDetails} ShowId={ShowId} />
         <Hr />
 
+        <VideoPlayer isShow={true} id={ShowDetails?.id} season={EpisodeDetails?.season_number} episode={EpisodeDetails?.episode_number} show={show} />
 
+        <Hr />
         {/* season cast */}
         {EpisodeDetails?.guest_stars?.length === 0 ? (<Empty message='No Cast To Show' />) : (
             <CastDetails Cast={EpisodeDetails?.guest_stars} />
