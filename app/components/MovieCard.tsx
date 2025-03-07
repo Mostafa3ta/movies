@@ -13,12 +13,14 @@ import { Genre, Movie, TVShowDetails } from '../types'
 
 export default async function MovieCard({ movie, pageLink, show = false, isSearch = false }: { movie: Movie | TVShowDetails | any, pageLink?: string, show?: boolean, isSearch?: boolean }) {
     const details = movie?.media_type && movie?.media_type === "person" ? [] : await Promise.all(show === false ? [fetchMovieDetails({ MovieID: movie.id })] : [fetchShowDetails({ ShowId: movie.id })])
+    console.log(show);
+    
     
     return (
         <Link className={`group text-center my-4 ${movie?.media_type === "person" ? 'pointer-events-none' : ''}`} key={movie?.id} href={`${movie?.media_type === "person" ? '' : pageLink + '/?id=' + movie?.id}`}>
-            <div className={`w-full h-64 sm:h-96 rounded-md overflow-hidden relative ${movie.media_type === "person" ? "" : "after:inset-0 after:absolute after:z-20 after:w-0 after:h-full after:bg-[#0f0f0f]/60 after:duration-200 group-hover:after:w-full"}`}>
+            <div className={`w-full overflow-hidden rounded-md overflow-hidden relative ${movie.media_type === "person" ? "" : "after:inset-0 after:absolute after:z-20 after:w-0 after:h-full after:bg-[#0f0f0f]/60 after:duration-200 group-hover:after:w-full"}`}>
                 <div className='flex w-full h-full flex-col justify-center items-center'>
-                    <CustomImg className='w-full h-full object-cover duration-200 group-hover:scale-110 z-10 rounded-md' imgSrc={movie?.poster_path ? movie?.poster_path : movie?.profile_path} />
+                    <CustomImg className='w-full h-full object-contain duration-200 group-hover:scale-110 z-10 rounded-md' imgSrc={movie?.poster_path ? movie?.poster_path : movie?.profile_path} />
                     {movie?.media_type === "person" ? null :
                         <MotionItem whileInView={{ opacity: 1, y: 0, transition: { duration: 0.4 } }} className="w-full h-96 overflow-hidden rounded-2xl p-3 my-4 z-30 hidden group-hover:flex flex-col gap-4 items-center justify-center duration-200 absolute">
                             {show ? <>
