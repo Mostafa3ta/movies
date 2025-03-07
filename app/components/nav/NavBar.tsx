@@ -37,7 +37,7 @@ export default function NavBar() {
             </button>
           </header>
           <Hr className='mt-6 ' />
-          <div className="mt-6 flex justify-center px-4 mb-2">
+          <div className="my-2 flex justify-center px-4 ">
             <MotionItem initial={{ opacity: 0, y: -40 }} whileInView={{ opacity: 1, y: 0 }} className={`${activeTap === 'movies' ? 'block' : 'hidden'}`}>
               {MoviesLinks.map((link: any) => (<NavLink key={link.name} navlink={link} />))}
             </MotionItem>

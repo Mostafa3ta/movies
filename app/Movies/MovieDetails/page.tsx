@@ -31,8 +31,8 @@ async function MovieDetails({ searchParams }: searchParamsProps) {
 
             <>
                 <GridContainer className='bg-black/50 rounded-xl items-center md:grid-cols-3' cols={1}>
-                    <MotionItem initial={{ opacity: 0, x: -30 }} animation={{ opacity: 1, x: 0 }} className="flex justify-center items-center md:col-span-1">
-                        <CustomImg imgSrc={movieDetails.poster_path} />
+                    <MotionItem initial={{ opacity: 0, x: -30 }} animation={{ opacity: 1, x: 0 }} className="flex justify-center  items-center md:col-span-1">
+                        <CustomImg className='object-contain mx-auto w-full h-96 md:h-full rounded-md' imgSrc={movieDetails.poster_path} />
                     </MotionItem>
                     <MotionItem animation={{ opacity: 1, y: 0 }} className="md:col-span-2 flex flex-col gap-3 px-4">
                         <h2 className="font-bold text-3xl px-4 text-center text-yellow-400 my-6 pb-2">
@@ -58,7 +58,7 @@ async function MovieDetails({ searchParams }: searchParamsProps) {
                             </span>
                         ))} />
                         <DetailsLine text="Release" value={movieDetails.release_date} />
-                        <DetailsLine className='mb-4 items-center px-8' noLine text="Runtime" value={<>
+                        <DetailsLine className='mb-4 items-center px-2 sm:px-8' noLine text="Runtime" value={<>
                             <span>{movieDetails.runtime}</span>
                             <span className="text-red-300 ps-1"> mins </span>
                         </>} />

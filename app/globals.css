@@ -91,7 +91,7 @@
 .swiper-button-prev {
   color: #fff !important;
   z-index: 999 !important;
-  @apply size-1 text-xs opacity-30 hover:opacity-50 rounded-full p-7 !important;
+  @apply size-1 text-xs opacity-30 hover:opacity-50 rounded-full px-2 !important;
 }
 
 .customScrollBar {

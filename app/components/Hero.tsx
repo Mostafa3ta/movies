@@ -13,7 +13,7 @@ export default async function Hero() {
     return (
         <div className='my-4'>
             <Heading title='Trending Movies' />
-            <SwiperCards spaceBetween={50} smSlides={{ slidesPerView: 1, spaceBetween: 50 }} mdSlides={{ slidesPerView: 2, spaceBetween: 50 }} lgSlides={{ slidesPerView: 2, spaceBetween: 50 }} pauseOnMouseEnter className='h-[20rem] px-6 mx-auto overflow-hidden'
+            <SwiperCards spaceBetween={50} xsSlides={{ slidesPerView: 1, spaceBetween: 30 }} smSlides={{ slidesPerView: 1, spaceBetween: 50 }} mdSlides={{ slidesPerView: 2, spaceBetween: 50 }} lgSlides={{ slidesPerView: 2, spaceBetween: 50 }} pauseOnMouseEnter className='h-[20rem] px-6 mx-auto overflow-hidden'
                 items={cardItems[0]?.results.map((item: Movie) => ({
                     card: <HeroCardInfo key={item?.id} image={item?.backdrop_path} title={item?.title} id={item?.id} desc={item?.overview} />,
                     src: item.poster_path
