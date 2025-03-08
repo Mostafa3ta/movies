@@ -4,7 +4,6 @@ import GridContainer from './defaults/GridContainer'
 import MovieCard from './MovieCard'
 
 export default function MoviesWrapper({ movies, pageLink, isShow, isSearch = false }: { movies: any, pageLink?: string, isShow?: boolean, isSearch?: boolean }) {
-    console.log(isShow);
 
     return <>
         <GridContainer cols={2} className='my-2 gap-4 md:grid-cols-3 xl:grid-cols-4'>

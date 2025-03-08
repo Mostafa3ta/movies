@@ -11,8 +11,6 @@ interface VideoProps {
 
 export default async function VideoPlayer({ id, isShow, title, show, season, episode }: VideoProps) {
     const embedUrl = isShow ? `https://vidsrc.xyz/embed/tv/${id}/${season}/${episode}` : `https://vidsrc.xyz/embed/movie/${id}`
-    console.log(show);
-
 
     return (
         !show ? null :

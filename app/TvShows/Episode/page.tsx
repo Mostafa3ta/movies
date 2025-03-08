@@ -33,7 +33,7 @@ async function EpisodeDetails({ searchParams }: searchParamsProps) {
 
         <GridContainer className='bg-black/50 rounded-xl items-center md:grid-cols-2' cols={1}>
             <MotionItem initial={{ opacity: 0, x: -30 }} animation={{ opacity: 1, x: 0 }} className="md:col-span-1 h-full w-full items-center">
-                <CustomImg isWide={true} className='w-full h-96 object-contain rounded-lg' imgSrc={EpisodeDetails?.still_path} />
+                <CustomImg isWide={true} className='w-full md:h-96 object-contain rounded-lg' imgSrc={EpisodeDetails?.still_path} />
             </MotionItem>
             <MotionItem animation={{ opacity: 1, y: 0 }} className="md:col-span-1 flex my-4 flex-col gap-2 justify-center px-4">
                 <h2 className="font-bold flex-initial text-3xl px-4 text-center text-yellow-400 pb-2 ">

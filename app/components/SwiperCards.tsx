@@ -21,7 +21,7 @@ interface SwiperCardsProps {
     lgSlides?: { slidesPerView: number, spaceBetween: number }
 }
 
-export default function SwiperCards({ items, PaginationImages, className, pauseOnMouseEnter, spaceBetween, delay, xsSlides, smSlides, mdSlides, lgSlides }: SwiperCardsProps) {
+export default function SwiperCards({ items, PaginationImages, className, pauseOnMouseEnter, slidesPerView, spaceBetween, delay, xsSlides, smSlides, mdSlides, lgSlides }: SwiperCardsProps) {
     const [swiper, setSwiper] = useState<SwiperType | null>()
     const [progress, setProgress] = useState(0)
 
@@ -68,15 +68,14 @@ export default function SwiperCards({ items, PaginationImages, className, pauseO
                         spaceBetween: lgSlides?.spaceBetween || 20,
                     },
                 }}
-                // slidesPerView={slidesPerView || 1}
-                // onSlideChange={() => console.log(swiper?.realIndex)}
+                slidesPerView={slidesPerView || 1}
                 onSwiper={(swiper) => setSwiper(swiper)}
             >
                 {items?.map(({ card }, item: any) => (
                     <SwiperSlide className='h-full' key={item}>{card}</SwiperSlide>
                 ))}
             </Swiper>
-            <div className='flex items-center justify-center gap-4 mt-4'>
+            {/* <div className='flex items-center justify-center gap-4 mt-4'>
                 {PaginationImages && items.map(({ src }, item: any) => (
                     <div onClick={() => {
                         swiper?.slideTo(item)
@@ -85,7 +84,7 @@ export default function SwiperCards({ items, PaginationImages, className, pauseO
                         {swiper?.realIndex === item && swiper?.autoplay.running && (<div style={{ width: `${progress}%` }} className='absolute duration-200 w-0 inset-0 z-10 h-full bg-black/30'></div>)}
                         {src && src !== '' ? <Image loading='lazy' src={imgBaseUrl + src} fill alt={src} className='object-cover' /> : null}{''}
                     </div>))}
-            </div>
+            </div> */}
         </div>
     )
 }

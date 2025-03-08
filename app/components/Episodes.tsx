@@ -9,7 +9,7 @@ export default function Episodes({ SeasonDetails, ShowId, EpisodeDetails }: { Se
 
     return <>
         <Heading center title={`Season ${SeasonDetails.season_number} Episodes`} />
-        <GridContainer className='my-8 items-center gap-4 mx-8 p-4 bg-black/40 rounded-xl overflow-auto max-h-[80vh] customScrollBar md:grid-cols-3 lg:grid-cols-4' cols={2}>
+        <GridContainer className='my-8 items-center gap-4 mx-8 p-4 bg-black/40 rounded-xl overflow-auto max-h-[80vh] customScrollBar sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4' cols={1}>
             {SeasonDetails?.episodes?.map((episode: SeasonEpisode) =>
                 <Link key={episode.episode_number} className='flex flex-col my-2 items-center text-center group' href={`Episode/?id=${ShowId}&season=${SeasonDetails.season_number}&episode=${episode.episode_number}`}>
                     <div className='flex w-full relative overflow-hidden flex-col items-center'>

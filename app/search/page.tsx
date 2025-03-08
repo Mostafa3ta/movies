@@ -10,8 +10,6 @@ export default async function page({ searchParams }: ParamsProps) {
   const pageNum = (((await searchParams)?.page > 500) ? 500 : (await searchParams)?.page || 1)
   const Query = (await searchParams)?.query || ''
   const results = await searchResults({ value: Query, pageNum })
-  console.log(pageNum);
-
 
   return (
     results?.success === false || results?.results?.length === 0 ?

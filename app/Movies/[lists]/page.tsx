@@ -16,9 +16,6 @@ async function movieListNum({ params, searchParams }: ParamsProps) {
     const listType = (await params)?.lists
     const pageNum = ((await searchParams)?.page > 500) ? 500 : (await searchParams)?.page || 1
     const movies = await fetchMoviesLists({ listType, pageNum })
-console.log(movies);
-
-
 
     return (
         movies[0]?.success === false ? <Empty message='Sorry, There is No Movies With This List Name' link="/Movies/AllMovies" linkText="Explore Other Movies" /> :
