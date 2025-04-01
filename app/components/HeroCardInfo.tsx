@@ -12,14 +12,14 @@ export default async function HeroCardInfo({ desc, title, id, image, btnText, bt
     return (<>
         <section className='relative rounded-2xl h-full overflow-hidden w-full'>
             <Image loading='lazy' src={imgBaseUrl + image} fill alt={title}
-                className='object-cover overflow-hidden rounded-xl w-full h-full' />
+                className='object-cover overflow-hidden rounded-md w-full h-full' />
         </section>
         <MotionItem
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0, transition: { duration: 1 } }}
             className='gap-4 p-4 absolute shadow-lg overflow-hidden h-[40%] w-[90%] bg-black/50 left-5 bottom-5 justify-end'>
             <div className='flex w-fit flex-col overflow-hidden'>
-                <h2 className="hover:text-fuchsia-500 duration-200 text-lg md:text-xl hover:no-underline underline border-neutral-100 font-semibold text-white">
+                <h2 className="hover:text-fuchsia-500 duration-200 text-lg md:text-xl border-neutral-100 font-semibold text-white">
                     <Link href={`/Movies/MovieDetails/?id=${id}`}>
                         {title}
                     </Link>
