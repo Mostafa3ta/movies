@@ -17,7 +17,10 @@ export default function Rating({ rate, className }: { rate: number, className?: 
             arrOfStar.push(<IoMdStar key={i} className='text-yellow-400' />);
         }
     }
-    return <div className={`${className} text-yellow-300 flex items-center text-base`}>{rate === 0 ? <span className='italic'>No Rating</span> : <>
+
+    console.log(rate);
+    
+    return <div className={`${className || ''} text-yellow-300 flex items-center text-base`}>{rate === 0 ? <span className=' italic'>No Rating</span> : <>
         <span className='me-1'>{`( ${rate?.toString(10).split('').splice(0, 3).join('')} )`}</span>
         {arrOfStar}
     </>}
