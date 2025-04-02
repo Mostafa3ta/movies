@@ -6,13 +6,13 @@ import Link from 'next/link'
 import { fetchMovieDetails } from '../api'
 import { imgBaseUrl } from '../constants'
 
-export default async function HeroCardInfo({ desc, title, id, image, btnText, btnStyle }: { desc: string | null, title: string, image?: string | null | undefined, btnText?: string, btnStyle?: string, id: number  }) {
+export default async function HeroCardInfo({ desc, title, id, image}: { desc: string | null, title: string, image?: string | null | undefined, id: number  }) {
     const movieInfo = await fetchMovieDetails({ MovieID: id })
 
     return (<>
-        <section className='relative rounded-2xl h-full overflow-hidden w-full'>
+        <section className='relative rounded-md h-full overflow-hidden w-full'>
             <Image loading='lazy' src={imgBaseUrl + image} fill alt={title}
-                className='object-cover overflow-hidden rounded-md w-full h-full' />
+                className='object-cover object-center overflow-hidden rounded-md w-full h-full' />
         </section>
         <MotionItem
             initial={{ opacity: 0, x: -50 }}
