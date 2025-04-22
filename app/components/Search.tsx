@@ -79,7 +79,7 @@ const Search = () => {
         }}
       />
 
-      <SearchIcon onClick={() => router.push('/search')} className="w-5 h-5 absolute left-3 cursor-pointer duration-150 hover:text-fuchsia-500" />
+      <SearchIcon className="w-5 h-5 absolute left-3 cursor-pointer duration-150 hover:text-fuchsia-500" />
 
       {pathName !== '/search' &&
         <AnimatePresence>
