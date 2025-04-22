@@ -27,7 +27,7 @@ export default function PagesButtons({ movies }: { movies: any }) {
             {/* page number 1 */}
             <div className={` flex items-center gap-x-1 ${page_1 || movies?.page === 2 || movies?.page === 3 ? 'hidden' : ''}`}>
                 <CustomPagesBtn onClick={() => handleUpdateParams((page_1), (1))} condition={page_1}>1</CustomPagesBtn>
-                <span className="text-xs">•••</span>
+                <span className="text-xs opacity-40">•••</span>
             </div>
 
             <CustomPagesBtn onClick={() => handleUpdateParams((page_1), (movies?.page - 1))} hide={page_1}>{movies?.page - 1}</CustomPagesBtn>
@@ -36,7 +36,7 @@ export default function PagesButtons({ movies }: { movies: any }) {
 
             {/*  last page */}
             <div className={` flex items-center gap-x-1 ${totalPages || movies?.page === movies?.total_pages - 1 || movies?.page === (500 - 2) || movies?.page === (500 - 1) || movies?.page === 500 ? 'hidden' : ''}`}>
-                <span className="text-xs">•••</span>
+                <span className="text-xs opacity-40">•••</span>
                 <CustomPagesBtn onClick={() => handleUpdateParams((totalPages), (movies?.total_pages > 500 ? 500 : movies?.total_pages))} condition={(totalPages || movies?.page === 500)}>{movies?.total_pages > 500 ? 500 : movies?.total_pages}</CustomPagesBtn>
             </div>
 

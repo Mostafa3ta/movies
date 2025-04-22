@@ -23,6 +23,8 @@ async function MovieDetails({ searchParams }: searchParamsProps) {
     const Cast = await fetchMovieCast({ MovieID })
     const Recommend = await fetchMovieRecommend({ MovieID })
     const Simi = await fetchMovieSimilar({ MovieID })
+    console.log(movieDetails);
+    
 
 
     return (

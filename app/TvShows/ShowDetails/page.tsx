@@ -30,7 +30,7 @@ async function ShowDetails({ searchParams }: ParamsProps) {
                         <CustomImg imgSrc={ShowDetails.poster_path} />
                     </MotionItem>
                     <MotionItem animation={{ opacity: 1, y: 0 }} className="md:col-span-2 flex my-4 md:my-2 flex-col gap-3 sm:px-4">
-                        <h2 className="font-bold text-3xl px-4 text-center text-yellow-400 my-2 pb-2">
+                        <h2 className="font-bold md:text-3xl text-xl px-4 text-center text-yellow-400 my-2 pb-2">
                             {ShowDetails.name}
                         </h2>
 

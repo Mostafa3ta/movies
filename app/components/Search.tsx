@@ -79,7 +79,7 @@ const Search = () => {
         }}
       />
 
-      <SearchIcon className="w-5 h-5 absolute left-3 cursor-pointer duration-150 hover:text-fuchsia-500" />
+      <SearchIcon onClick={() => router.push('/search')} className="w-5 h-5 absolute left-3 cursor-pointer duration-150 hover:text-fuchsia-500" />
 
       {pathName !== '/search' &&
         <AnimatePresence>
@@ -134,7 +134,7 @@ const Search = () => {
                     : (query !== '' && <p className="text-center text-white py-4">Sorry, No results found with "{query}"</p>)
                 )}
               {Results?.total_pages > 1 && <div className="m-4 flex justify-center items-center">
-                <Link href={`/search/?page=1&query=${query}`} className="hover:text-fuchsia-500 hover:underline duration-150">View More Results</Link>
+                <Link href={`/search/?page=1&query=${query}`} className=" hover:bg-gray-600 bg-gray-700 rounded-sm p-2 transition-all duration-150">View More Results</Link>
               </div>}
             </MotionItem>
           )}
