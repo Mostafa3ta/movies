@@ -106,8 +106,8 @@ const Search = () => {
                         <div className="col-span-1 overflow-hidden">
                           <CustomImg className="object-cover w-full transition-all group-hover/item:scale-110" imgSrc={result?.backdrop_path} isWide />
                         </div>
-                        <div className="w-full col-span-1 flex flex-col gap-2">
-                          <h1 className="font-semibold capitalize text-lg transition-all group-hover/item:text-fuchsia-400 text-white">{result?.name ? result?.name : result?.title}</h1>
+                        <div className="w-full h-full col-span-1 flex flex-col justify-between py-3 gap-2">
+                          <h4 className="font-semibold capitalize text-base line-clamp-2 transition-all group-hover/item:text-fuchsia-400 text-white">{result?.name ? result?.name : result?.title}</h4>
                           {result?.media_type === "movie" ?
                             (<p className="flex items-center gap-1 text-sm text-gray-400">Movie <TbMovie className="w-4 h-4 text-red-600" /> </p>)
                             : (<p className="flex items-center gap-1 text-sm text-gray-400">Tv <MdOutlineLiveTv className="w-4 h-4 text-yellow-600" /> </p>)}
@@ -122,8 +122,8 @@ const Search = () => {
                         <div className="col-span-1 overflow-hidden">
                           <CustomImg className="object-cover w-full transition-all group-hover/item:scale-110" imgSrc={Results?.results[0]?.backdrop_path} isWide />
                         </div>
-                        <div className="w-full col-span-1 flex flex-col gap-2">
-                          <h1 className="font-semibold capitalize text-lg transition-all group-hover/item:text-fuchsia-400 text-white">{Results?.results[0]?.name ? Results?.results[0]?.name : Results?.results[0]?.title}</h1>
+                        <div className="w-full h-full col-span-1 flex flex-col justify-between py-3 gap-2">
+                          <h4 className="font-semibold capitalize text-base line-clamp-2 transition-all group-hover/item:text-fuchsia-400 text-white">{Results?.results[0]?.name ? Results?.results[0]?.name : Results?.results[0]?.title}</h4>
                           {Results?.results[0]?.media_type === "movie" ?
                             (<p className="flex items-center gap-1 text-sm text-gray-400">Movie <TbMovie className="w-4 h-4 text-red-600" /> </p>)
                             : (<p className="flex items-center gap-1 text-sm text-gray-400">Tv <MdOutlineLiveTv className="w-4 h-4 text-yellow-600" /> </p>)}
