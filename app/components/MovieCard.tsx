@@ -32,7 +32,7 @@ export default async function MovieCard({ movie, pageLink, show = false, isSearc
                                 {/* <p className="text-sm mt-1 line-clamp-3 text-gray-200">{movie?.overview}</p> */}
                             </div>
                             <div className="flex flex-wrap w-full gap-2 items-center mt-2 justify-center">
-                                {details[0]?.genres?.map((genre: Genre) => <p key={genre?.id} className="text-sm text-gray-200 bg-gray-500/80 py-1 px-2 rounded-full">{genre.name}</p>)}
+                                {details[0]?.genres?.slice(0, 3).map((genre: Genre) => <p key={genre?.id} className="text-sm text-gray-200 bg-gray-500/80 py-1 px-2 rounded-full">{genre.name}</p>)}
                             </div>
                         </MotionItem>
                     }
