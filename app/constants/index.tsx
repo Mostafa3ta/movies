@@ -1,4 +1,4 @@
-import { FaFireAlt, FaPlayCircle, FaStar } from 'react-icons/fa'
+import { FaFireAlt, FaPlayCircle, FaStar, FaUserAlt } from 'react-icons/fa'
 import { MdOutlineLiveTv } from 'react-icons/md'
 import { FaArrowTrendUp } from 'react-icons/fa6'
 import { TbMovie } from 'react-icons/tb'
@@ -8,7 +8,7 @@ export const options = {
     method: 'GET',
     headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYmYzZGJkZWM5NmY5MDg1NDEwN2IyM2ZmMTRhMGQ3ZSIsInN1YiI6IjY1ODhjMmI0NGRhM2Q0NjRjYTQxODhkNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CLtVHt8DtHtNC_v2wKKAxtJOZMP6GZ-NlE7ed3sk2gY'
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_TOKEN || ''}`
     }
 }
 
@@ -28,4 +28,9 @@ export const ShowsLinks = [
     { name: 'Airing Today', link: '/TvShows/airing_today/?page=1', icon: <FaPlayCircle /> },
     { name: 'On The Air', link: '/TvShows/on_the_air/?page=1', icon: <FaFireAlt /> },
     { name: 'Top Rated', link: '/TvShows/top_rated/?page=1', icon: <FaStar /> },
+]
+
+export const StarsLinks = [
+    { name: 'Popular', link: '/Stars/popular/?page=1', icon: <FaFireAlt /> },
+    { name: 'Trending', link: '/Stars/Trending/?page=1', icon: <FaArrowTrendUp /> },
 ]

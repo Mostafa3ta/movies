@@ -3,10 +3,12 @@ import React, { ReactNode, useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import Image from 'next/image';
+import 'swiper/css/pagination';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import type SwiperType from 'swiper';
-import { imgBaseUrl } from '../constants';
+// import { imgBaseUrl } from '../constants';
+// import Image from 'next/image';
+
 interface SwiperCardsProps {
     items: { card: ReactNode, src?: string }[],
     PaginationImages?: Boolean,
@@ -40,16 +42,107 @@ export default function SwiperCards({ items, PaginationImages, className, pauseO
 
 
     return (
-        <div>
+        <div className="relative group/swiper">
+            <style jsx global>{`
+                /* Modern Navigation Buttons */
+                .swiper-button-next,
+                .swiper-button-prev {
+                    width: 40px !important;
+                    height: 40px !important;
+                    background: rgba(17, 24, 39, 0.85) !important;
+                    backdrop-filter: blur(16px) !important;
+                    border-radius: 50% !important;
+                    border: 2px solid rgba(217, 70, 239, 0.5) !important;
+                    transition: all 0.3s ease !important;
+                    opacity: 0.7 !important;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+                }
+                
+                .swiper-button-next {
+                    right: 3px !important;
+                }
+                
+                .swiper-button-prev {
+                    left: 3px !important;
+                }
+                
+                .group\/swiper:hover .swiper-button-next,
+                .group\/swiper:hover .swiper-button-prev {
+                    opacity: 1 !important;
+                }
+                
+                .swiper-button-next:hover,
+                .swiper-button-prev:hover {
+                    background: linear-gradient(135deg, rgba(217, 70, 239, 0.2), rgba(168, 85, 247, 0.2)) !important;
+                    border-color: rgba(217, 70, 239, 0.6) !important;
+                    transform: scale(1.1) !important;
+                    box-shadow: 0 0 20px rgba(217, 70, 239, 0.4) !important;
+                }
+                
+                .swiper-button-next:after,
+                .swiper-button-prev:after {
+                    font-size: 18px !important;
+                    font-weight: bold !important;
+                    color: white !important;
+                }
+                
+                /* Disabled state - prevent click-through */
+                .swiper-button-disabled {
+                    opacity: 0 !important;
+                    pointer-events: none !important;
+                }
+                
+                /* Modern Pagination Bullets */
+                .swiper-pagination-bullet {
+                    width: 12px !important;
+                    height: 12px !important;
+                    background: rgba(255, 255, 255, 0.3) !important;
+                    border: 2px solid rgba(255, 255, 255, 0.5) !important;
+                    opacity: 1 !important;
+                    transition: all 0.3s ease !important;
+                }
+                
+                .swiper-pagination-bullet-active {
+                    width: 40px !important;
+                    height: 12px !important;
+                    border-radius: 6px !important;
+                    background: linear-gradient(90deg, #d946ef, #a855f7, #ec4899) !important;
+                    border-color: rgba(217, 70, 239, 0.8) !important;
+                    box-shadow: 0 0 15px rgba(217, 70, 239, 0.5) !important;
+                }
+                
+                .swiper-pagination-bullet:hover {
+                    background: rgba(255, 255, 255, 0.6) !important;
+                    transform: scale(1.2) !important;
+                }
+                
+                /* Pagination Container */
+                .swiper-pagination {
+                    display: flex !important;
+                    justify-content: center !important;
+                    gap: 6px !important;
+                    z-index: 10 !important;
+                }
+                
+                /* Hide pagination when not enough slides */
+                .swiper-pagination-lock {
+                    display: none !important;
+                }
+            `}</style>
+            
             <Swiper
                 pagination={{
-                    type: 'bullets',
+                    clickable: true,
+                    dynamicBullets: false,
+                    hideOnClick: false,
                 }}
                 navigation={true}
+                loop={items.length > 5}
                 modules={[Autoplay, Navigation, Pagination]}
-                autoplay={{ delay: delay || 4000, pauseOnMouseEnter: pauseOnMouseEnter || false, }}
+                autoplay={{ delay: delay || 7000, pauseOnMouseEnter: pauseOnMouseEnter || false, }}
                 spaceBetween={spaceBetween || 50}
-                className={`overflow-auto w-full px-8 ${className || 'h-96'}`}
+                watchSlidesProgress={true}
+                className={`overflow-visible w-full px-8 pb-8 ${className || 'h-96'}`}
                 breakpoints={{
                     0: {
                         slidesPerView: xsSlides?.slidesPerView || 1,
@@ -75,16 +168,6 @@ export default function SwiperCards({ items, PaginationImages, className, pauseO
                     <SwiperSlide className='h-full' key={item}>{card}</SwiperSlide>
                 ))}
             </Swiper>
-            {/* <div className='flex items-center justify-center gap-4 mt-4'>
-                {PaginationImages && items.map(({ src }, item: any) => (
-                    <div onClick={() => {
-                        swiper?.slideTo(item)
-                        swiper?.autoplay.stop()
-                    }} key={item} className={`${swiper?.realIndex === item && 'shadow-md border border-rose-500 opacity-90'} rounded-xl cursor-pointer hover:-translate-y-2 transition hover:shadow-md hover:opacity-90 duration-200 z-10 overflow-hidden max-w-lg w-full h-40 relative`}>
-                        {swiper?.realIndex === item && swiper?.autoplay.running && (<div style={{ width: `${progress}%` }} className='absolute duration-200 w-0 inset-0 z-10 h-full bg-black/30'></div>)}
-                        {src && src !== '' ? <Image loading='lazy' src={imgBaseUrl + src} fill alt={src} className='object-cover' /> : null}{''}
-                    </div>))}
-            </div> */}
         </div>
     )
 }

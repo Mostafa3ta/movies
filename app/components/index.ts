@@ -17,16 +17,16 @@ import Hero from "./Hero";
 import SwiperCards from "./SwiperCards";
 import MotionItem from "./defaults/MotionItem";
 import Rating from "./defaults/Rating";
-import CustomColorBtn from "./defaults/CustomColorBtn";
 import Heading from "./defaults/Heading";
 import Empty from "./defaults/Empty";
 import LoadingSkelton from "./LoadingSkelton";
 import CustomImg from './defaults/CustomImg'
 import DetailsLine from './defaults/DetailsLine'
-import Hr from './defaults/Hr'
 import MovieCard from './MovieCard'
 import HeroCardInfo from './HeroCardInfo'
 import Search from './Search'
+import ParallaxSection from './defaults/ParallaxSection'
+import AdvancedFilters from './AdvancedFilters'
 
 export {
     NavBar,
@@ -41,7 +41,6 @@ export {
     SwiperCards,
     MotionItem,
     Rating,
-    CustomColorBtn,
     Heading,
     Empty,
     LoadingSkelton,
@@ -55,7 +54,8 @@ export {
     MovieCard,
     CustomImg,
     DetailsLine,
-    Hr,
     Footer,
     Search,
+    ParallaxSection,
+    AdvancedFilters,
 }

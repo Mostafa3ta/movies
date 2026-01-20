@@ -4,6 +4,9 @@ import { SearchIcon, XIcon } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import MotionItem from "./defaults/MotionItem";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { searchResults, updateSearchParams } from "../api";
 import CustomImg from "./defaults/CustomImg";
@@ -58,84 +61,155 @@ const Search = () => {
   return (
     <div
       ref={outsideREF}
-      className=" w-full flex relative group mb-6 items-center gap-2 justify-between rounded-xl md:w-[80%] lg:w-[50%] bg-main"
+      className="w-full flex relative group mb-6 items-center gap-3 justify-between"
     >
-      <input
-        value={query}
-        onChange={(e) => {
-          handleUpdateParams(e.target);
-          setActive(true);
-          setQuery(e.target.value);
-        }}
-        onClick={() => setActive(true)}
-        placeholder="Search..."
-        className=" focus:outline-none border border-black/30 text-gray-900 text-sm rounded-xl block w-full ps-10 p-2.5 dark:bg-black/30 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-      />
-      <XIcon
-        className={`${query === '' ? 'hidden' : 'block hover:text-fuchsia-500'} absolute right-3 w-5 h-5 cursor-pointer duration-150}`}
-        onClick={() => {
-          handleUpdateParams({ value: "" });
-          setQuery('');
-        }}
-      />
+      <div className="relative w-full">
+        <Input
+          value={query}
+          onChange={(e) => {
+            handleUpdateParams(e.target);
+            setActive(true);
+            setQuery(e.target.value);
+          }}
+          onClick={() => setActive(true)}
+          placeholder="Search movies, TV shows..."
+          className="border-2 border-gray-700/50 text-gray-100 md:rounded-2xl rounded-xl w-full pl-12 md:pr-12 pr-8 md:py-6 py-5 md:h-14 h-12 bg-gray-900/80 backdrop-blur-xl shadow-lg focus-visible:shadow-fuchsia-500/40 focus-visible:border-fuchsia-500/60 transition-all duration-300 placeholder-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0"
+        />
+        <SearchIcon className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-fuchsia-400 transition-colors duration-300 pointer-events-none" />
+        {query !== '' && (
+          <Button
+            onClick={() => {
+              handleUpdateParams({ value: "" });
+              setQuery('');
+            }}
+            variant="ghost"
+            size="icon"
+            className="absolute right-4 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full hover:bg-gray-700 p-0"
+          >
+            <XIcon className="w-4 h-4 text-gray-400 hover:text-fuchsia-400 transition-colors duration-200" />
+          </Button>
+        )}
+      </div>
 
-      <SearchIcon className="w-5 h-5 absolute left-3 cursor-pointer duration-150 hover:text-fuchsia-500" />
+      {/* Search & Filtering Button */}
+      <Link
+        href={query !== '' ? `/search/?page=1&query=${query}` : '/search'}
+        className="flex-shrink-0 md:p-4 p-2 bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-500 hover:to-purple-500 md:rounded-2xl rounded-xl transition-all duration-300 text-sm font-semibold text-white shadow-lg hover:shadow-fuchsia-500/50 whitespace-nowrap border border-fuchsia-500/30"
+      >
+        Search
+      </Link>
 
       {pathName !== '/search' &&
         <AnimatePresence>
           {(Results?.results || loading) && active && (
             <MotionItem
-              initial={{ height: 0 }}
-              whileInView={{ height: "auto" }}
-              className="absolute w-full customScrollBar top-full z-50 bg-[#222425] rounded-2xl shadow-sm max-h-[70vh] overflow-y-scroll left-0"
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute w-full top-full z-50 bg-gray-900/95 backdrop-blur-xl rounded-2xl border border-gray-700/50 shadow-2xl shadow-fuchsia-500/20 max-h-[70vh] overflow-y-auto left-0 mt-3"
             >
               {loading ? (
-                Array.from({ length: 5 }).map((_, i) => (
-                  <div key={i} className="space-y-2 flex items-start gap-2 px-4 py-2">
-                    <Skeleton className="h-20  rounded-2xl w-[40%]" />
-                    <div className=" flex flex-col gap-3">
-                      <Skeleton className="h-4 w-[150px]" />
+                <div className="p-4 space-y-3">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <div key={i} className="flex items-center gap-4 p-3 rounded-xl bg-gray-800/50">
+                      <Skeleton className="h-20 w-32 rounded-lg" />
+                      <div className="flex-1 space-y-2">
+                        <Skeleton className="h-4 w-3/4" />
+                        <Skeleton className="h-3 w-1/2" />
+                      </div>
                     </div>
-                  </div>
-                ))
+                  ))}
+                </div>
               ) :
                 Results?.results?.length !== 0 ? (
-                  Results?.results?.map((result: any) => (
-                    <div key={result.id} className={`flex gap-2 px-4 py-2 ${result?.media_type == "person" && "hidden"}`}>
-                      <Link href={`${result?.media_type === "movie" ? "/Movies/MovieDetails" : "/TvShows/ShowDetails"}/?id=${result?.id}`} className="grid grid-cols-2 overflow-hidden w-full group/item bg-neutral-900 gap-6 items-center">
-                        <div className="col-span-1 overflow-hidden">
-                          <CustomImg className="object-cover w-full transition-all group-hover/item:scale-110" imgSrc={result?.backdrop_path} isWide />
-                        </div>
-                        <div className="w-full h-full col-span-1 flex flex-col justify-between py-3 gap-2">
-                          <h4 className="font-semibold capitalize text-base line-clamp-2 transition-all group-hover/item:text-fuchsia-400 text-white">{result?.name ? result?.name : result?.title}</h4>
-                          {result?.media_type === "movie" ?
-                            (<p className="flex items-center gap-1 text-sm text-gray-400">Movie <TbMovie className="w-4 h-4 text-red-600" /> </p>)
-                            : (<p className="flex items-center gap-1 text-sm text-gray-400">Tv <MdOutlineLiveTv className="w-4 h-4 text-yellow-600" /> </p>)}
-                        </div>
-                      </Link>
-                    </div>
-                  ))
+                  <div className="p-3 space-y-2">
+                    {Results?.results?.map((result: any) => (
+                      result?.media_type !== "person" && (
+                        <Link 
+                          key={result.id} 
+                          href={`${result?.media_type === "movie" ? "/Movies/MovieDetails" : "/TvShows/ShowDetails"}/?id=${result?.id}`}
+                          onClick={() => setActive(false)}
+                          className="flex gap-4 p-3 rounded-xl hover:bg-gray-800/60 transition-all duration-300 group/result border border-transparent hover:border-fuchsia-500/30"
+                        >
+                          <div className="relative w-28 h-16 flex-shrink-0 overflow-hidden rounded-lg">
+                            <CustomImg 
+                              className="object-cover w-full h-full transition-transform duration-300 group-hover/result:scale-110" 
+                              imgSrc={result?.backdrop_path} 
+                              isWide 
+                            />
+                          </div>
+                          <div className="flex-1 flex flex-col justify-center gap-1.5 min-w-0">
+                            <h4 className="font-semibold text-sm text-gray-100 line-clamp-1 transition-colors group-hover/result:text-fuchsia-400">
+                              {result?.name ? result?.name : result?.title}
+                            </h4>
+                            <div className="flex items-center gap-2">
+                              {result?.media_type === "movie" ? (
+                                <Badge variant="secondary" className="bg-red-500/20 text-gray-300 border-red-500/30 hover:bg-red-500/30 gap-1">
+                                  <TbMovie className="w-3 h-3" /> Movie
+                                </Badge>
+                              ) : (
+                                <Badge variant="secondary" className="bg-yellow-500/20 text-gray-300 border-yellow-500/30 hover:bg-yellow-500/30 gap-1">
+                                  <MdOutlineLiveTv className="w-3 h-3" /> TV Show
+                                </Badge>
+                              )}
+                            </div>
+                          </div>
+                        </Link>
+                      )
+                    ))}
+                  </div>
                 ) : (
-                  Results?.results?.length === 1 && Results?.results[0].media_type !== "person" ?
-                    <div key={Results?.results[0].id} className={`flex gap-2 px-4 py-2 ${Results?.results[0]?.media_type == "person" && "hidden"}`}>
-                      <Link href={`${Results?.results[0]?.media_type === "movie" ? "/Movies/MovieDetails" : "/TvShows/ShowDetails"}/?id=${Results?.results[0]?.id}`} className="grid grid-cols-2 overflow-hidden w-full group/item bg-neutral-900 gap-6 items-center">
-                        <div className="col-span-1 overflow-hidden">
-                          <CustomImg className="object-cover w-full transition-all group-hover/item:scale-110" imgSrc={Results?.results[0]?.backdrop_path} isWide />
+                  Results?.results?.length === 1 && Results?.results[0].media_type !== "person" ? (
+                    <div className="p-3">
+                      <Link 
+                        href={`${Results?.results[0]?.media_type === "movie" ? "/Movies/MovieDetails" : "/TvShows/ShowDetails"}/?id=${Results?.results[0]?.id}`}
+                        onClick={() => setActive(false)}
+                        className="flex gap-4 p-3 rounded-xl hover:bg-gray-800/60 transition-all duration-300 group/result border border-transparent hover:border-fuchsia-500/30"
+                      >
+                        <div className="relative w-28 h-16 flex-shrink-0 overflow-hidden rounded-lg">
+                          <CustomImg 
+                            className="object-cover w-full h-full transition-transform duration-300 group-hover/result:scale-110" 
+                            imgSrc={Results?.results[0]?.backdrop_path} 
+                            isWide 
+                          />
                         </div>
-                        <div className="w-full h-full col-span-1 flex flex-col justify-between py-3 gap-2">
-                          <h4 className="font-semibold capitalize text-base line-clamp-2 transition-all group-hover/item:text-fuchsia-400 text-white">{Results?.results[0]?.name ? Results?.results[0]?.name : Results?.results[0]?.title}</h4>
-                          {Results?.results[0]?.media_type === "movie" ?
-                            (<p className="flex items-center gap-1 text-sm text-gray-400">Movie <TbMovie className="w-4 h-4 text-red-600" /> </p>)
-                            : (<p className="flex items-center gap-1 text-sm text-gray-400">Tv <MdOutlineLiveTv className="w-4 h-4 text-yellow-600" /> </p>)}
+                        <div className="flex-1 flex flex-col justify-center gap-1.5 min-w-0">
+                          <h4 className="font-semibold text-sm text-gray-100 line-clamp-1 transition-colors group-hover/result:text-fuchsia-400">
+                            {Results?.results[0]?.name ? Results?.results[0]?.name : Results?.results[0]?.title}
+                          </h4>
+                          <div className="flex items-center gap-2">
+                            {Results?.results[0]?.media_type === "movie" ? (
+                              <Badge variant="secondary" className="bg-red-500/20 text-gray-300 border-red-500/30 hover:bg-red-500/30 gap-1">
+                                <TbMovie className="w-3 h-3" /> Movie
+                              </Badge>
+                            ) : (
+                              <Badge variant="secondary" className="bg-yellow-500/20 text-gray-300 border-yellow-500/30 hover:bg-yellow-500/30 gap-1">
+                                <MdOutlineLiveTv className="w-3 h-3" /> TV Show
+                              </Badge>
+                            )}
+                          </div>
                         </div>
                       </Link>
                     </div>
-
-                    : (query !== '' && <p className="text-center text-white py-4">Sorry, No results found with "{query}"</p>)
+                  ) : (
+                    query !== '' && (
+                      <div className="p-6 text-center">
+                        <p className="text-gray-400 text-sm">No results found for <span className="text-fuchsia-400 font-semibold">"{query}"</span></p>
+                      </div>
+                    )
+                  )
                 )}
-              {Results?.total_pages > 1 && <div className="m-4 flex justify-center items-center">
-                <Link href={`/search/?page=1&query=${query}`} className=" hover:bg-gray-600 bg-gray-700 rounded-sm p-2 transition-all duration-150">View More Results</Link>
-              </div>}
+              {Results?.total_pages > 1 && (
+                <div className="p-4 border-t border-gray-700/50">
+                  <Link 
+                    href={`/search/?page=1&query=${query}`}
+                    onClick={() => setActive(false)}
+                    className="block text-center py-2.5 px-4 bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-500 hover:to-purple-500 rounded-xl transition-all duration-300 text-sm font-semibold text-white shadow-lg hover:shadow-fuchsia-500/50"
+                  >
+                    View All Results
+                  </Link>
+                </div>
+              )}
             </MotionItem>
           )}
         </AnimatePresence>

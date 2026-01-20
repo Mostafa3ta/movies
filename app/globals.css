@@ -2,16 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===== Background Gradient Animation ===== */
 .background {
-  background: rgb(220, 21, 141);
-  background: linear-gradient(43deg,
-      rgba(220, 21, 141, 1) 0%,
-      rgba(120, 18, 87, 1) 0%,
-      rgba(37, 16, 43, 1) 0%,
-      rgba(45, 16, 47, 1) 53%,
-      rgba(120, 18, 87, 1) 100%,
-      rgba(220, 21, 141, 1) 100%,
-      rgba(120, 18, 87, 1) 100%);
+  background: linear-gradient(135deg,
+      rgba(45, 16, 47, 1) 0%,
+      rgba(37, 16, 43, 1) 25%,
+      rgba(60, 18, 70, 1) 50%,
+      rgba(37, 16, 43, 1) 75%,
+      rgba(45, 16, 47, 1) 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ===== Custom Animations ===== */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ===== Glassmorphism ===== */
+.glass {
+  @apply bg-white/10 backdrop-blur-md border border-white/20;
+}
+
+.glass-dark {
+  @apply bg-black/30 backdrop-blur-lg border border-white/10;
+}
+
+/* ===== Card Effects ===== */
+.card-hover {
+  @apply transition-all duration-300 ease-out;
+}
+
+.card-hover:hover {
+  @apply transform -translate-y-2 shadow-2xl shadow-fuchsia-500/20;
+}
+
+.glow {
+  box-shadow: 0 0 20px rgba(217, 70, 239, 0.5),
+              0 0 40px rgba(168, 85, 247, 0.3);
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 30px rgba(217, 70, 239, 0.7),
+              0 0 60px rgba(168, 85, 247, 0.5),
+              0 0 90px rgba(217, 70, 239, 0.3);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 
@@ -73,29 +161,45 @@
   }
 }
 
+/* ===== Next.js Error Page ===== */
 .next-error-h1 {
   border-right: 1px solid rgba(255, 255, 255, .3);
   line-height: 50px;
 }
 
-/* .swiper-button-next {
-  right: -20px !important;
+
+.swiper-pagination {
+  position: relative !important;
+  bottom: auto !important;
+  margin-top: 15px !important;
+  margin-bottom: 8px !important;
 }
 
-
-.swiper-button-prev {
-  left: -20px !important;
-  } */
-
-.swiper-button-next,
-.swiper-button-prev {
-  color: #fff !important;
-  z-index: 999 !important;
-  @apply size-1 text-xs opacity-30 hover:opacity-50 rounded-full px-2 !important;
+/* ===== Global Custom Scrollbar with Theme ===== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.8) rgba(30, 10, 35, 0.9);
 }
 
-.customScrollBar {
-  @apply [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:rounded-lg [&::-webkit-scrollbar-track]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-xl [&::-webkit-scrollbar-thumb]:bg-gray-500 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500;
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(30, 10, 35, 0.9);
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #a855f7 0%, #9333ea 50%, #c026d3 100%);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #c084fc 0%, #a855f7 50%, #d946ef 100%);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
 }
 
 

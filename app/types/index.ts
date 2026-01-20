@@ -1,274 +1,275 @@
 interface Movie {
-    adult: boolean;
-    backdrop_path: string | null | undefined; // Can be null
-    genre_ids: number[];
-    id: number;
-    original_language: string;
-    original_title: string;
-    overview: string | null; // Can be null
-    popularity: number;
-    poster_path: string | null | undefined; // Can be null
-    release_date: string;
-    title: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
+  adult: boolean;
+  backdrop_path: string | null | undefined; // Can be null
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string | null; // Can be null
+  popularity: number;
+  poster_path: string | null | undefined; // Can be null
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
 }
 
 interface SearchMovie {
-    backdrop_path: string | null;
-    id: number;
-    title: string;
-    original_title: string;
-    overview: string;
-    poster_path: string | null;
-    media_type: "movie";
-    adult: boolean;
-    original_language: string;
-    genre_ids: number;
-    popularity: number;
-    release_date: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
+  backdrop_path: string | null;
+  id: number;
+  title: string;
+  original_title: string;
+  overview: string;
+  poster_path: string | null;
+  media_type: "movie";
+  adult: boolean;
+  original_language: string;
+  genre_ids: number;
+  popularity: number;
+  release_date: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
 }
 
 interface SearchTVShow {
-    backdrop_path: string | null;
-    id: number;
-    name: string;
-    original_name: string;
-    overview: string;
-    poster_path: string | null;
-    media_type: "tv";
-    adult: boolean;
-    original_language: string;
-    genre_ids: number;
-    popularity: number;
-    first_air_date: string;
-    vote_average: number;
-    vote_count: number;
-    origin_country: string;
+  backdrop_path: string | null;
+  id: number;
+  name: string;
+  original_name: string;
+  overview: string;
+  poster_path: string | null;
+  media_type: "tv";
+  adult: boolean;
+  original_language: string;
+  genre_ids: number;
+  popularity: number;
+  first_air_date: string;
+  vote_average: number;
+  vote_count: number;
+  origin_country: string;
 }
 
 interface SearchPerson {
-    id: number;
-    name: string;
-    original_name: string;
-    media_type: "person";
-    adult: boolean;
-    popularity: number;
-    gender: number; // 0: unknown, 1: female, 2: male
-    known_for_department: string;
-    profile_path: string | null;
-    known_for: Movie;
+  id: number;
+  name: string;
+  original_name: string;
+  media_type: "person";
+  adult: boolean;
+  popularity: number;
+  gender: number; // 0: unknown, 1: female, 2: male
+  known_for_department: string;
+  profile_path: string | null;
+  known_for: Movie;
 }
 
-
 interface SearchResponse {
-    page: number;
-    results: (SearchMovie | SearchTVShow | SearchPerson)[];
-    total_pages: number;
-    total_results: number;
+  page: number;
+  results: (SearchMovie | SearchTVShow | SearchPerson)[];
+  total_pages: number;
+  total_results: number;
 }
 
 interface Genre {
-    id: number;
-    name: string;
+  id: number;
+  name: string;
 }
 
 interface Network {
-    id: number;
-    logo_path: string | null;
-    name: string;
-    origin_country: string;
+  id: number;
+  logo_path: string | null;
+  name: string;
+  origin_country: string;
 }
 
 interface ProductionCompany {
-    id: number;
-    logo_path: string | null;
-    name: string;
-    origin_country: string;
+  id: number;
+  logo_path: string | null;
+  name: string;
+  origin_country: string;
 }
 
 interface ProductionCountry {
-    iso_3166_1: string;
-    name: string;
+  iso_3166_1: string;
+  name: string;
 }
 
 interface SpokenLanguage {
-    english_name: string;
-    iso_639_1: string;
-    name: string;
+  english_name: string;
+  iso_639_1: string;
+  name: string;
 }
 
 interface TVShowDetails {
-    adult: boolean;
-    backdrop_path: string | null;
-    created_by: CreatedBy[]; // Or specify a more precise type if needed
-    episode_run_time: number[];
-    first_air_date: string;
-    genres: Genre[];
-    homepage: string;
-    id: number;
-    in_production: boolean;
-    languages: string[];
-    last_air_date: string;
-    last_episode_to_air: SeasonEpisode;
-    name: string;
-    next_episode_to_air: SeasonEpisode;
-    networks: Network[];
-    number_of_episodes: number;
-    number_of_seasons: number;
-    origin_country: string[];
-    original_language: string;
-    original_name: string;
-    overview: string;
-    popularity: number;
-    poster_path: string | null;
-    production_companies: ProductionCompany[];
-    production_countries: ProductionCountry[];
-    seasons: Season[];
-    spoken_languages: SpokenLanguage[];
-    status: string;
-    tagline: string;
-    type: string;
-    vote_average: number;
-    vote_count: number;
+  adult: boolean;
+  backdrop_path: string | null;
+  created_by: CreatedBy[]; // Or specify a more precise type if needed
+  episode_run_time: number[];
+  first_air_date: string;
+  genres: Genre[];
+  homepage: string;
+  id: number;
+  in_production: boolean;
+  languages: string[];
+  last_air_date: string;
+  last_episode_to_air: SeasonEpisode;
+  name: string;
+  next_episode_to_air: SeasonEpisode;
+  networks: Network[];
+  number_of_episodes: number;
+  number_of_seasons: number;
+  origin_country: string[];
+  original_language: string;
+  original_name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string | null;
+  production_companies: ProductionCompany[];
+  production_countries: ProductionCountry[];
+  seasons: Season[];
+  spoken_languages: SpokenLanguage[];
+  status: string;
+  tagline: string;
+  type: string;
+  vote_average: number;
+  vote_count: number;
 }
 
 interface CastMember {
-    adult: boolean;
-    gender: number | null;
-    id: number;
-    known_for_department: string;
-    name: string;
-    original_name: string;
-    popularity: number;
-    profile_path: string | null;
-    cast_id?: number; // Optional for cast members
-    character?: string; // Optional for cast members
-    credit_id: string;
-    order?: number; // Optional for cast members
+  adult: boolean;
+  gender: number | null;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
+  cast_id?: number; // Optional for cast members
+  character?: string; // Optional for cast members
+  credit_id: string;
+  order?: number; // Optional for cast members
 }
 
 interface CrewMember {
-    adult: boolean;
-    gender: number | null;
-    id: number;
-    known_for_department: string;
-    name: string;
-    original_name: string;
-    popularity: number;
-    profile_path: string | null;
-    credit_id: string;
-    department: string;
-    job: string;
+  adult: boolean;
+  gender: number | null;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
+  credit_id: string;
+  department: string;
+  job: string;
 }
 
 interface Credits {
-    cast: CastMember[];
-    crew: CrewMember[];
-    id: number;
+  cast: CastMember[];
+  crew: CrewMember[];
+  id: number;
 }
 interface CreatedBy {
-    id: number;
-    credit_id: string;
-    name: string;
-    original_name: string;
-    gender: number | null;
-    profile_path: string | null;
+  id: number;
+  credit_id: string;
+  name: string;
+  original_name: string;
+  gender: number | null;
+  profile_path: string | null;
 }
 interface CrewMember {
-    department: string;
-    job: string;
-    credit_id: string;
-    adult: boolean;
-    gender: number | null;
-    id: number;
-    known_for_department: string;
-    name: string;
-    original_name: string;
-    popularity: number;
-    profile_path: string | null;
+  department: string;
+  job: string;
+  credit_id: string;
+  adult: boolean;
+  gender: number | null;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
 }
 
 interface GuestStar {
-    character: string;
-    credit_id: string;
-    order: number;
-    adult: boolean;
-    gender: number;
-    id: number;
-    known_for_department: string;
-    name: string;
-    original_name: string;
-    popularity: number;
-    profile_path: string | null;
+  character: string;
+  credit_id: string;
+  order: number;
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
 }
 
 interface EpisodeDetails {
-    air_date: string;
-    episode_number: number;
-    episode_type: string;
-    id: number;
-    name: string;
-    overview: string;
-    production_code: string;
-    runtime: number | null;
-    season_number: number;
-    show_id: number;
-    still_path: string | null;
-    vote_average: number;
-    vote_count: number;
-    crew: CrewMember[];
-    guest_stars: GuestStar[];
+  air_date: string;
+  episode_number: number;
+  episode_type: string;
+  id: number;
+  name: string;
+  overview: string;
+  production_code: string;
+  runtime: number | null;
+  season_number: number;
+  show_id: number;
+  still_path: string | null;
+  vote_average: number;
+  vote_count: number;
+  crew: CrewMember[];
+  guest_stars: GuestStar[];
 }
 
 interface SeasonEpisode {
-    id: number;
-    name: string;
-    overview: string;
-    vote_average: number;
-    vote_count: number;
-    air_date: string;
-    episode_number: number;
-    episode_type: string;
-    production_code: string;
-    runtime: number | null;
-    season_number: number;
-    show_id: number;
-    still_path: string | null;
+  id: number;
+  name: string;
+  overview: string;
+  vote_average: number;
+  vote_count: number;
+  air_date: string;
+  episode_number: number;
+  episode_type: string;
+  production_code: string;
+  runtime: number | null;
+  season_number: number;
+  show_id: number;
+  still_path: string | null;
 }
 
 interface Season {
-    _id: string;
-    air_date: string;
-    episodes: EpisodeDetails[];
-    name: string;
-    overview: string;
-    id: number;
-    poster_path: string | null;
-    season_number: number;
-    vote_average: number;
+  _id: string;
+  air_date: string;
+  episodes: EpisodeDetails[];
+  name: string;
+  overview: string;
+  id: number;
+  poster_path: string | null;
+  season_number: number;
+  vote_average: number;
+  episode_count?: number;
 }
 
 export type {
-    CreatedBy,
-    SearchResponse,
-    SearchMovie,
-    SearchTVShow,
-    SearchPerson,
-    Movie,
-    Genre,
-    Network,
-    ProductionCompany,
-    ProductionCountry,
-    Season,
-    SeasonEpisode,
-    SpokenLanguage,
-    EpisodeDetails,
-    TVShowDetails,
-    CastMember, CrewMember, Credits
+  CreatedBy,
+  SearchResponse,
+  SearchMovie,
+  SearchTVShow,
+  SearchPerson,
+  Movie,
+  Genre,
+  Network,
+  ProductionCompany,
+  ProductionCountry,
+  Season,
+  SeasonEpisode,
+  SpokenLanguage,
+  EpisodeDetails,
+  TVShowDetails,
+  CastMember,
+  CrewMember,
+  Credits,
 };
-
