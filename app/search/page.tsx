@@ -45,30 +45,36 @@ export default async function SearchPage({ searchParams }: ParamsProps) {
           <TabsList className="glass-dark border border-gray-700/50 p-1.5 mb-8 flex-wrap h-auto w-full justify-start">
             <TabsTrigger 
               value="all" 
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-fuchsia-600 data-[state=active]:to-purple-600 data-[state=active]:text-white px-6 py-2.5 rounded-lg font-semibold transition-all data-[state=active]:shadow-lg data-[state=active]:shadow-fuchsia-500/50"
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-fuchsia-600 data-[state=active]:to-purple-600 data-[state=active]:text-white px-4 sm:px-6 py-2.5 rounded-lg font-semibold transition-all data-[state=active]:shadow-lg data-[state=active]:shadow-fuchsia-500/50"
             >
               All ({results?.results?.length || 0})
             </TabsTrigger>
             <TabsTrigger 
               value="movie"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-600 data-[state=active]:to-red-500 data-[state=active]:text-white px-6 py-2.5 rounded-lg font-semibold transition-all data-[state=active]:shadow-lg data-[state=active]:shadow-red-500/50 flex items-center gap-2"
+              disabled={results?.results?.filter((item: any) => item.media_type === 'movie').length === 0}
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-600 data-[state=active]:to-red-500 data-[state=active]:text-white px-4 sm:px-6 py-2.5 rounded-lg font-semibold transition-all data-[state=active]:shadow-lg data-[state=active]:shadow-red-500/50 flex items-center gap-1 disabled:opacity-30 disabled:cursor-not-allowed disabled:grayscale"
             >
-              <TbMovie className="w-4 h-4" />
-              Movies ({results?.results?.filter((item: any) => item.media_type === 'movie').length || 0})
+              <TbMovie className="w-6 h-6 font-bold" />
+              <span className="hidden sm:inline">Movies</span>
+              <span>({results?.results?.filter((item: any) => item.media_type === 'movie').length || 0})</span>
             </TabsTrigger>
             <TabsTrigger 
               value="tv"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-600 data-[state=active]:to-yellow-500 data-[state=active]:text-white px-6 py-2.5 rounded-lg font-semibold transition-all data-[state=active]:shadow-lg data-[state=active]:shadow-yellow-500/50 flex items-center gap-2"
+              disabled={results?.results?.filter((item: any) => item.media_type === 'tv').length === 0}
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-600 data-[state=active]:to-yellow-500 data-[state=active]:text-white px-4 sm:px-6 py-2.5 rounded-lg font-semibold transition-all data-[state=active]:shadow-lg data-[state=active]:shadow-yellow-500/50 flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed disabled:grayscale"
             >
-              <MdOutlineLiveTv className="w-4 h-4" />
-              TV Shows ({results?.results?.filter((item: any) => item.media_type === 'tv').length || 0})
+              <MdOutlineLiveTv className="w-6 h-6 font-bold" />
+              <span className="hidden sm:inline">TV Shows</span>
+              <span>({results?.results?.filter((item: any) => item.media_type === 'tv').length || 0})</span>
             </TabsTrigger>
             <TabsTrigger 
               value="person"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-blue-500 data-[state=active]:text-white px-6 py-2.5 rounded-lg font-semibold transition-all data-[state=active]:shadow-lg data-[state=active]:shadow-blue-500/50 flex items-center gap-2"
+              disabled={results?.results?.filter((item: any) => item.media_type === 'person').length === 0}
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-blue-500 data-[state=active]:text-white px-4 sm:px-6 py-2.5 rounded-lg font-semibold transition-all data-[state=active]:shadow-lg data-[state=active]:shadow-blue-500/50 flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed disabled:grayscale"
             >
-              <FaUser className="w-4 h-4" />
-              People ({results?.results?.filter((item: any) => item.media_type === 'person').length || 0})
+              <FaUser className="w-6 h-6 font-bold" />
+              <span className="hidden sm:inline">People</span>
+              <span>({results?.results?.filter((item: any) => item.media_type === 'person').length || 0})</span>
             </TabsTrigger>
           </TabsList>
 
@@ -77,29 +83,40 @@ export default async function SearchPage({ searchParams }: ParamsProps) {
           </TabsContent>
 
           <TabsContent value="movie">
-            <MoviesWrapper 
-              isSearch={true} 
-              movies={{
-                ...results,
-                results: results.results.filter((item: any) => item.media_type === 'movie')
-              }}
-              requestedPage={requestedPageNum}
-            />
+            {results.results.filter((item: any) => item.media_type === 'movie').length === 0 ? (
+              <Empty message="No movies found" icon={<TbMovie className="w-16 h-16 text-red-400" />} />
+            ) : (
+              <MoviesWrapper 
+                isSearch={true} 
+                movies={{
+                  ...results,
+                  results: results.results.filter((item: any) => item.media_type === 'movie')
+                }}
+                requestedPage={requestedPageNum}
+              />
+            )}
           </TabsContent>
 
           <TabsContent value="tv">
-            <MoviesWrapper 
-              isSearch={true} 
-              movies={{
-                ...results,
-                results: results.results.filter((item: any) => item.media_type === 'tv')
-              }}
-              requestedPage={requestedPageNum}
-            />
+            {results.results.filter((item: any) => item.media_type === 'tv').length === 0 ? (
+              <Empty message="No TV shows found" icon={<MdOutlineLiveTv className="w-16 h-16 text-yellow-400" />} />
+            ) : (
+              <MoviesWrapper 
+                isSearch={true} 
+                movies={{
+                  ...results,
+                  results: results.results.filter((item: any) => item.media_type === 'tv')
+                }}
+                requestedPage={requestedPageNum}
+              />
+            )}
           </TabsContent>
 
           <TabsContent value="person">
-            <GridContainer cols={2} className='gap-6 md:grid-cols-4 xl:grid-cols-6'>
+            {results.results.filter((person: any) => person.media_type === 'person').length === 0 ? (
+              <Empty message="No people found" icon={<FaUser className="w-16 h-16 text-blue-400" />} />
+            ) : (
+              <GridContainer cols={2} className='gap-6 md:grid-cols-4 xl:grid-cols-6'>
               {results.results
                 .filter((person: any) => person.media_type === 'person')
                 .map((person: any, index: number) => (
@@ -129,7 +146,8 @@ export default async function SearchPage({ searchParams }: ParamsProps) {
                     </Link>
                   </MotionItem>
                 ))}
-            </GridContainer>
+              </GridContainer>
+            )}
           </TabsContent>
         </Tabs>
       </>

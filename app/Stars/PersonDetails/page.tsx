@@ -1,10 +1,11 @@
 import React from 'react'
 import { fetchPersonDetails, fetchPersonCombinedCredits, fetchPersonImages } from '@/app/api'
-import { CustomImg, Empty, GridContainer, MotionItem, MovieCard } from '@/app/components'
+import { CustomImg, DetailsLine, Empty, GridContainer, MotionItem, MovieCard } from '@/app/components'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { TbMovie } from 'react-icons/tb'
 import { MdOutlineLiveTv } from 'react-icons/md'
 import { FaUserSlash } from 'react-icons/fa'
+import { RiCake2Line, RiCalendarLine } from 'react-icons/ri'
 
 export const metadata = {
     title: "Person Details",
@@ -70,49 +71,56 @@ async function PersonDetails({ searchParams }: ParamsProps) {
                             {personDetails.name}
                         </h1>
 
-                        <div className="space-y-4 text-gray-300">
+                        <div className="space-y-3 md:space-y-4">
                             {personDetails.known_for_department && (
-                                <div className="flex flex-wrap gap-2 items-center">
-                                    <span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-gradient-to-r from-fuchsia-600/20 to-purple-600/20 border border-fuchsia-500/30 text-fuchsia-300 font-semibold text-sm">
-                                        Known For
-                                    </span>
-                                    <span className="font-semibold text-lg">{personDetails.known_for_department}</span>
-                                </div>
+                                <DetailsLine 
+                                    text="Known For" 
+                                    value={<span className="font-semibold text-lg">{personDetails.known_for_department}</span>} 
+                                />
                             )}
 
                             {personDetails.birthday && (
-                                <div className="flex flex-wrap gap-2 items-center">
-                                    <span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-gradient-to-r from-fuchsia-600/20 to-purple-600/20 border border-fuchsia-500/30 text-fuchsia-300 font-semibold text-sm">
-                                        Birthday
-                                    </span>
-                                    <span>{personDetails.birthday}</span>
-                                    {age && (
-                                        <span className="text-gray-400">
-                                            ({age} years{personDetails.deathday ? ' old at death' : ' old'})
+                                <DetailsLine 
+                                    text="Birthday" 
+                                    value={<span>{personDetails.birthday}</span>} 
+                                />
+                            )}
+
+                            {age && (
+                                <DetailsLine 
+                                    text="Age" 
+                                    value={
+                                        <span className="font-semibold">
+                                            {age} years{personDetails.deathday ? ' old at death' : ' old'}
                                         </span>
-                                    )}
-                                    {personDetails.deathday && (
-                                        <span className="text-red-400 font-semibold">† {personDetails.deathday}</span>
-                                    )}
-                                </div>
+                                    } 
+                                />
+                            )}
+
+                            {personDetails.deathday && (
+                                <DetailsLine 
+                                    text="Date of Death" 
+                                    value={
+                                        <span className="text-red-400 font-semibold flex items-center gap-2">
+                                            † {personDetails.deathday}
+                                        </span>
+                                    } 
+                                />
                             )}
 
                             {personDetails.place_of_birth && (
-                                <div className="flex flex-wrap gap-2 items-center">
-                                    <span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-gradient-to-r from-fuchsia-600/20 to-purple-600/20 border border-fuchsia-500/30 text-fuchsia-300 font-semibold text-sm">
-                                        Place of Birth
-                                    </span>
-                                    <span>{personDetails.place_of_birth}</span>
-                                </div>
+                                <DetailsLine 
+                                    text="Place of Birth" 
+                                    value={<span>{personDetails.place_of_birth}</span>} 
+                                />
                             )}
 
                             {personDetails.also_known_as && personDetails.also_known_as.length > 0 && (
-                                <div className="flex flex-wrap gap-2 items-start">
-                                    <span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-gradient-to-r from-fuchsia-600/20 to-purple-600/20 border border-fuchsia-500/30 text-fuchsia-300 font-semibold text-sm flex-shrink-0">
-                                        Also Known As
-                                    </span>
-                                    <span className="flex-1">{personDetails.also_known_as.slice(0, 3).join(', ')}</span>
-                                </div>
+                                <DetailsLine 
+                                    noLine
+                                    text="Also Known As" 
+                                    value={<span>{personDetails.also_known_as.slice(0, 3).join(', ')}</span>} 
+                                />
                             )}
                         </div>
                     </div>
@@ -135,28 +143,35 @@ async function PersonDetails({ searchParams }: ParamsProps) {
                     <TabsList className="glass-dark border border-gray-700/50 p-1.5 mb-8 flex-wrap h-auto w-full justify-start">
                         <TabsTrigger 
                             value="all" 
-                            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-fuchsia-600 data-[state=active]:to-purple-600 data-[state=active]:text-white px-6 py-2.5 rounded-lg font-semibold transition-all"
+                            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-fuchsia-600 data-[state=active]:to-purple-600 data-[state=active]:text-white px-4 sm:px-6 py-2.5 rounded-lg font-semibold transition-all"
                         >
                             All ({allCredits.length})
                         </TabsTrigger>
                         <TabsTrigger 
                             value="movies"
-                            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-600 data-[state=active]:to-red-500 data-[state=active]:text-white px-6 py-2.5 rounded-lg font-semibold transition-all flex items-center gap-2"
+                            disabled={movies.length === 0}
+                            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-600 data-[state=active]:to-red-500 data-[state=active]:text-white px-4 sm:px-6 py-2.5 rounded-lg font-semibold transition-all flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed disabled:grayscale"
                         >
-                            <TbMovie className="w-4 h-4" />
-                            Movies ({movies.length})
+                            <TbMovie className="w-6 h-6 font-bold" />
+                            <span className="hidden sm:inline">Movies</span>
+                            <span>({movies.length})</span>
                         </TabsTrigger>
                         <TabsTrigger 
                             value="tv"
-                            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-600 data-[state=active]:to-yellow-500 data-[state=active]:text-white px-6 py-2.5 rounded-lg font-semibold transition-all flex items-center gap-2"
+                            disabled={tvShows.length === 0}
+                            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-600 data-[state=active]:to-yellow-500 data-[state=active]:text-white px-4 sm:px-6 py-2.5 rounded-lg font-semibold transition-all flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed disabled:grayscale"
                         >
-                            <MdOutlineLiveTv className="w-4 h-4" />
-                            TV Shows ({tvShows.length})
+                            <MdOutlineLiveTv className="w-6 h-6 font-bold" />
+                            <span className="hidden sm:inline">TV Shows</span>
+                            <span>({tvShows.length})</span>
                         </TabsTrigger>
                     </TabsList>
 
                     <TabsContent value="all">
-                        <GridContainer cols={2} className='gap-4 gap-y-7 md:grid-cols-3 xl:grid-cols-5'>
+                        {allCredits.length === 0 ? (
+                            <Empty message="No credits found" />
+                        ) : (
+                            <GridContainer cols={2} className='gap-4 gap-y-7 md:grid-cols-3 xl:grid-cols-5'>
                             {allCredits.map((item: any, index: number) => (
                                 <MovieCard
                                     key={`${item.id}-${item.media_type}-${index}`}
@@ -166,11 +181,15 @@ async function PersonDetails({ searchParams }: ParamsProps) {
                                     pageLink={item.media_type === 'movie' ? '/Movies/MovieDetails' : '/TvShows/ShowDetails'}
                                 />
                             ))}
-                        </GridContainer>
+                            </GridContainer>
+                        )}
                     </TabsContent>
 
                     <TabsContent value="movies">
-                        <GridContainer cols={2} className='gap-4 gap-y-7 md:grid-cols-3 xl:grid-cols-5'>
+                        {movies.length === 0 ? (
+                            <Empty message="No movies found" icon={<TbMovie className="w-16 h-16 text-red-400" />} />
+                        ) : (
+                            <GridContainer cols={2} className='gap-4 gap-y-7 md:grid-cols-3 xl:grid-cols-5'>
                             {movies.map((movie: any, index: number) => (
                                 <MovieCard
                                     key={`movie-${movie.id}-${index}`}
@@ -180,11 +199,15 @@ async function PersonDetails({ searchParams }: ParamsProps) {
                                     pageLink='/Movies/MovieDetails'
                                 />
                             ))}
-                        </GridContainer>
+                            </GridContainer>
+                        )}
                     </TabsContent>
 
                     <TabsContent value="tv">
-                        <GridContainer cols={2} className='gap-4 gap-y-7 md:grid-cols-3 xl:grid-cols-5'>
+                        {tvShows.length === 0 ? (
+                            <Empty message="No TV shows found" icon={<MdOutlineLiveTv className="w-16 h-16 text-yellow-400" />} />
+                        ) : (
+                            <GridContainer cols={2} className='gap-4 gap-y-7 md:grid-cols-3 xl:grid-cols-5'>
                             {tvShows.map((show: any, index: number) => (
                                 <MovieCard
                                     key={`tv-${show.id}-${index}`}
@@ -194,7 +217,8 @@ async function PersonDetails({ searchParams }: ParamsProps) {
                                     pageLink='/TvShows/ShowDetails'
                                 />
                             ))}
-                        </GridContainer>
+                            </GridContainer>
+                        )}
                     </TabsContent>
                 </Tabs>
             </div>
