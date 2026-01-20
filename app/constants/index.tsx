@@ -3,12 +3,20 @@ import { MdOutlineLiveTv } from 'react-icons/md'
 import { FaArrowTrendUp } from 'react-icons/fa6'
 import { TbMovie } from 'react-icons/tb'
 
+// Validate API token exists
+if (!process.env.NEXT_PUBLIC_TMDB_API_TOKEN) {
+    throw new Error(
+        'NEXT_PUBLIC_TMDB_API_TOKEN is not defined. ' +
+        'Please add it to your environment variables. ' +
+        'Get your API key from https://www.themoviedb.org/settings/api'
+    );
+}
 
 export const options = {
     method: 'GET',
     headers: {
         accept: 'application/json',
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_TOKEN || ''}`
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_TOKEN}`
     }
 }
 

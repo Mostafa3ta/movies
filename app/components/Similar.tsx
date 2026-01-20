@@ -41,7 +41,7 @@ export default function Similar({
           lgSlides={{ slidesPerView: 5, spaceBetween: 20 }}
           pauseOnMouseEnter
           className="text-center items-center h-full glass-dark rounded-2xl py-8 shadow-xl"
-          items={Recommend?.results
+          items={(Recommend?.results || [])
             ?.slice(0, 12)
             .map((show: any, index: number) => ({
               card: (

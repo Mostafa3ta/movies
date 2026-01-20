@@ -9,7 +9,7 @@ import { Movie } from '../types'
 export default async function Hero() {
     
     const cardItems = await fetchMoviesLists({ listType: 'Trending', pageNum: 1 })
-    const topMovies = cardItems[0]?.results.slice(0, 8); // Limit to top 8 for performance
+    const topMovies = cardItems[0]?.results?.slice(0, 8) || []; // Limit to top 8 for performance
     
 
     return (
