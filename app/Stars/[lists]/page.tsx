@@ -48,7 +48,7 @@ async function PeopleListPage({ params, searchParams }: ParamsProps) {
                         isShow={false} 
                         isPerson={true}
                         movies={people[0]} 
-                        pageLink={`/People/PersonDetails`}
+                        pageLink={`/Stars/PersonDetails`}
                         requestedPage={pageNum}
                     />
                 </MotionItem>
