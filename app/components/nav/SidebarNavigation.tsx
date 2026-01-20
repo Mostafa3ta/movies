@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import NavLink from './NavLink'
 import { MoviesLinks, ShowsLinks, StarsLinks } from '@/app/constants'
 import { usePathname } from 'next/navigation'
@@ -16,15 +16,30 @@ import {
 export default function SidebarNavigation() {
   const pathname = usePathname()
   
-  // Determine which section to expand based on pathname
-  const getDefaultExpanded = () => {
+  // Determine which section to expand based on pathname - only for list pages
+  const getExpandedSection = () => {
+    // Check if we're on a list page (contains ?page= or ends with a list type)
+    const isListPage = pathname.includes('/?page=') || 
+                       pathname.match(/\/(Trending|popular|top_rated|now_playing|airing_today|on_the_air|AllMovies|AllShows)/i)
+    
+    if (!isListPage) return undefined // Don't expand any section on detail pages
+    
     if (pathname.startsWith('/TvShows') || pathname.startsWith('/tvshows')) {
       return 'shows'
     } else if (pathname.startsWith('/Stars') || pathname.startsWith('/People') || pathname.startsWith('/people')) {
       return 'people'
+    } else if (pathname.startsWith('/Movies')) {
+      return 'movies'
     }
-    return 'movies'
+    return undefined
   }
+
+  const [expandedSection, setExpandedSection] = useState<string | undefined>(getExpandedSection())
+
+  // Update expanded section when pathname changes
+  useEffect(() => {
+    setExpandedSection(getExpandedSection())
+  }, [pathname])
 
   const sections = [
     {
@@ -51,7 +66,13 @@ export default function SidebarNavigation() {
   ]
 
   return (
-    <Accordion type="single" collapsible defaultValue={getDefaultExpanded()} className="w-full space-y-3">
+    <Accordion 
+      type="single" 
+      collapsible 
+      value={expandedSection} 
+      onValueChange={setExpandedSection}
+      className="w-full space-y-3"
+    >
       {sections.map((section) => {
         const Icon = section.icon
 
@@ -62,11 +83,11 @@ export default function SidebarNavigation() {
             className="border-none"
           >
             <AccordionTrigger
-              className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 hover:no-underline ${
+              className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 hover:no-underline group ${
                 section.isActive
-                  ? 'bg-gradient-to-r from-fuchsia-600/80 to-purple-600/80 text-white shadow-lg shadow-fuchsia-500/30'
-                  : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white'
-              }`}
+                  ? 'bg-gradient-to-r from-fuchsia-600/80 to-purple-600/80 text-white shadow-lg shadow-fuchsia-500/30 [&>svg]:!text-white'
+                  : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white [&>svg]:text-gray-400 group-hover:[&>svg]:text-white'
+              } [&>svg]:!transition-transform [&>svg]:!duration-200 [&[data-state=open]>svg]:!rotate-180 [&>svg]:!stroke-[2.5]`}
             >
               <div className="flex items-center gap-3">
                 <Icon className="w-5 h-5" />
