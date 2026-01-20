@@ -20,7 +20,7 @@ export default function Similar({
   title?: string;
 }) {
   return (
-    <div className="my-6 relative">
+    <div className="my-6 relative overflow-hidden">
       {/* Background glow effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-fuchsia-500/5 to-transparent -z-10 blur-3xl"></div>
 

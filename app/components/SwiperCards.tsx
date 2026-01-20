@@ -142,7 +142,7 @@ export default function SwiperCards({ items, PaginationImages, className, pauseO
                 autoplay={{ delay: delay || 7000, pauseOnMouseEnter: pauseOnMouseEnter || false, }}
                 spaceBetween={spaceBetween || 50}
                 watchSlidesProgress={true}
-                className={`overflow-visible w-full px-8 pb-8 ${className || 'h-96'}`}
+                className={`overflow-hidden w-full px-8 pb-8 ${className || 'h-96'}`}
                 breakpoints={{
                     0: {
                         slidesPerView: xsSlides?.slidesPerView || 1,
