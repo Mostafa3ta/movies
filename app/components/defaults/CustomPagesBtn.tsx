@@ -1,7 +1,5 @@
 'use client'
-import Link from 'next/link'
 import React, { MouseEventHandler } from 'react'
-import Spinner from './Spinner'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
@@ -16,7 +14,7 @@ export default function CustomPagesBtn({ condition, onClick, children, hide, cur
             className={cn(
                 "min-h-[36px] min-w-[36px] md:min-h-[42px] md:min-w-[42px]",
                 "flex justify-center items-center",
-                "py-2 px-2.5 md:py-2.5 md:px-4",
+                "p-1.5 md:py-2.5 md:px-4",
                 "text-xs md:text-sm font-semibold",
                 "rounded-lg md:rounded-xl",
                 "transition-all duration-300",

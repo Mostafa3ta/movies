@@ -34,12 +34,12 @@ export default function CastDetails({ Cast }: { Cast: CastMember[] | CrewMember[
                                     <h4 className='text-sm font-bold text-white group-hover:text-fuchsia-400 transition-colors duration-300 line-clamp-2'>
                                         {actor.name}
                                     </h4>
-                                    {'character' in actor && (
+                                    {'character' in actor && actor.character && actor.character.trim() !== "" && (
                                         <p className='text-xs font-medium text-gray-300 line-clamp-2'>
                                             as {actor.character}
                                         </p>
                                     )}
-                                    {'job' in actor && (
+                                    {'job' in actor && actor.job && actor.job.trim() !== "" && (
                                         <p className='text-xs font-medium text-gray-300'>
                                             {actor.job}
                                         </p>

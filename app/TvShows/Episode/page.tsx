@@ -64,25 +64,39 @@ async function EpisodeDetails({ searchParams }: searchParamsProps) {
                     </h1>
 
                     <div className="space-y-3 md:space-y-4">
-                        <DetailsLine text="Show" value={<h3 className='font-semibold text-gray-100'>{ShowDetails.name}</h3>} />
+                        <DetailsLine text="Show" value={
+                            !ShowDetails.name || ShowDetails.name === "" ? (
+                                <span className='italic text-gray-400'>Not Available</span>
+                            ) : (
+                                <h3 className='font-semibold text-gray-100'>{ShowDetails.name}</h3>
+                            )
+                        } />
                         <DetailsLine text="Season" value={
-                            EpisodeDetails?.season_number === 0 ? 
+                            !EpisodeDetails?.season_number && EpisodeDetails?.season_number !== 0 ? (
+                                <span className='italic text-gray-400'>Not Available</span>
+                            ) : EpisodeDetails?.season_number === 0 ? 
                             <span className='italic text-gray-400'>Unknown</span> : 
                             <span className='font-semibold text-fuchsia-400'>{EpisodeDetails?.season_number}</span>
                         } />
-                        <DetailsLine text="Episode" value={<span className='font-semibold text-fuchsia-400'>{EpisodeDetails?.episode_number}</span>} />
+                        <DetailsLine text="Episode" value={
+                            !EpisodeDetails?.episode_number && EpisodeDetails?.episode_number !== 0 ? (
+                                <span className='italic text-gray-400'>Not Available</span>
+                            ) : (
+                                <span className='font-semibold text-fuchsia-400'>{EpisodeDetails?.episode_number}</span>
+                            )
+                        } />
                         <DetailsLine text="Rating" value={<Rating rate={EpisodeDetails?.vote_average} />} />
                         <DetailsLine text="Air Date" value={
-                            EpisodeDetails?.air_date === "" ? 
-                            <span className="text-gray-400">Unknown</span> : 
+                            !EpisodeDetails?.air_date || EpisodeDetails?.air_date === "" ? 
+                            <span className="italic text-gray-400">Not Available</span> : 
                             <span className="font-semibold">{EpisodeDetails?.air_date}</span>
                         } />
                         <DetailsLine 
                             noLine 
                             text="Runtime" 
                             value={
-                                EpisodeDetails.runtime === null ? 
-                                <span className="text-gray-400">Unknown</span> : 
+                                !EpisodeDetails.runtime || EpisodeDetails.runtime === null ? 
+                                <span className="italic text-gray-400">Not Available</span> : 
                                 <span className="font-semibold">{EpisodeDetails.runtime} <span className="text-fuchsia-400">mins</span></span>
                             } 
                         />
@@ -99,7 +113,13 @@ async function EpisodeDetails({ searchParams }: searchParamsProps) {
             className="my-8 md:my-12 glass-dark rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl"
         >
             <h2 className="text-xl sm:text-2xl font-bold text-fuchsia-400 mb-3 md:mb-4">Overview</h2>
-            <p className="text-gray-300 text-sm sm:text-base leading-relaxed">{ShowDetails.overview}</p>
+            <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+                {!ShowDetails.overview || ShowDetails.overview === "" ? (
+                    <span className="italic text-gray-400">No overview available</span>
+                ) : (
+                    ShowDetails.overview
+                )}
+            </p>
         </MotionItem>
 
         {/* Season Episodes */}

@@ -21,6 +21,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { MdTv, MdPeopleAlt, MdTvOff } from "react-icons/md";
+import { getStatusColor } from "@/lib/statusColors";
 
 export const metadata = {
   title: "Tv Show Details",
@@ -86,14 +87,20 @@ async function ShowDetails({ searchParams }: ParamsProps) {
             <div className="space-y-3 md:space-y-4">
               <DetailsLine
                 text="Genres"
-                value={ShowDetails.genres?.map((gener: any) => (
-                  <Badge
-                    key={gener.id}
-                    className="mx-0.5 sm:mx-1 my-0.5 sm:my-1 bg-gradient-to-r from-fuchsia-600/80 to-purple-600/80 text-gray-100 border-white/20 hover:from-fuchsia-500/80 hover:to-purple-500/80"
-                  >
-                    {gener.name}
-                  </Badge>
-                ))}
+                value={
+                  !ShowDetails.genres || ShowDetails.genres.length === 0 ? (
+                    <span className="italic text-gray-400">Not Available</span>
+                  ) : (
+                    ShowDetails.genres.map((gener: any) => (
+                      <Badge
+                        key={gener.id}
+                        className="mx-0.5 sm:mx-1 my-0.5 sm:my-1 bg-gradient-to-r from-fuchsia-600/80 to-purple-600/80 text-gray-100 border-white/20 hover:from-fuchsia-500/80 hover:to-purple-500/80"
+                      >
+                        {gener.name}
+                      </Badge>
+                    ))
+                  )
+                }
               />
               <DetailsLine
                 text="Rating"
@@ -102,26 +109,38 @@ async function ShowDetails({ searchParams }: ParamsProps) {
               <DetailsLine
                 text="Status"
                 value={
-                  <span className="font-semibold text-green-400">
+                  <span className={`font-semibold ${getStatusColor(ShowDetails.status, 'show')}`}>
                     {ShowDetails.status}
                   </span>
                 }
               />
               <DetailsLine
                 text="Languages"
-                value={ShowDetails.spoken_languages.map((lang: any) => (
-                  <span className="px-2" key={lang.iso_639_1}>
-                    {lang.name}
-                  </span>
-                ))}
+                value={
+                  !ShowDetails.spoken_languages || ShowDetails.spoken_languages.length === 0 ? (
+                    <span className="italic text-gray-400">Not Available</span>
+                  ) : (
+                    ShowDetails.spoken_languages.map((lang: any) => (
+                      <span className="px-2" key={lang.iso_639_1}>
+                        {lang.name}
+                      </span>
+                    ))
+                  )
+                }
               />
               <DetailsLine
                 text="Countries"
-                value={ShowDetails.production_countries.map((country: any) => (
-                  <span className="px-2" key={country.iso_3166_1}>
-                    {country.name}
-                  </span>
-                ))}
+                value={
+                  !ShowDetails.production_countries || ShowDetails.production_countries.length === 0 ? (
+                    <span className="italic text-gray-400">Not Available</span>
+                  ) : (
+                    ShowDetails.production_countries.map((country: any) => (
+                      <span className="px-2" key={country.iso_3166_1}>
+                        {country.name}
+                      </span>
+                    ))
+                  )
+                }
               />
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <DetailsLine

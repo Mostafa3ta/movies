@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# documentation files
+SETUP.md
+RECRUITER_GUIDE.md
+CHECKLIST.md

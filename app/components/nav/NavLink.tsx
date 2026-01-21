@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { ReactElement } from 'react'
+import { SlidersHorizontal } from 'lucide-react'
 
 export default function NavLink({ navlink }: { navlink: { name: string, link: string, icon: ReactElement } }) {
     const pathName = usePathname()
@@ -37,6 +38,11 @@ export default function NavLink({ navlink }: { navlink: { name: string, link: st
             
             {/* Text */}
             <span className="relative z-10">{name}</span>
+            
+            {/* Filter icon for filterable pages */}
+            {(name === 'All Movies' || name === 'All Shows') && (
+                <SlidersHorizontal className="ml-auto w-3 h-3 text-gray-400 group-hover:text-fuchsia-400 transition-colors duration-300" />
+            )}
             
             {/* Active indicator bar */}
             {isActive && (

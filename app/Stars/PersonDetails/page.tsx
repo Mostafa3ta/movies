@@ -72,19 +72,27 @@ async function PersonDetails({ searchParams }: ParamsProps) {
                         </h1>
 
                         <div className="space-y-3 md:space-y-4">
-                            {personDetails.known_for_department && (
-                                <DetailsLine 
-                                    text="Known For" 
-                                    value={<span className="font-semibold text-lg">{personDetails.known_for_department}</span>} 
-                                />
-                            )}
+                            <DetailsLine 
+                                text="Known For" 
+                                value={
+                                    !personDetails.known_for_department || personDetails.known_for_department === "" ? (
+                                        <span className="italic text-gray-400">Not Available</span>
+                                    ) : (
+                                        <span className="font-semibold text-lg">{personDetails.known_for_department}</span>
+                                    )
+                                } 
+                            />
 
-                            {personDetails.birthday && (
-                                <DetailsLine 
-                                    text="Birthday" 
-                                    value={<span>{personDetails.birthday}</span>} 
-                                />
-                            )}
+                            <DetailsLine 
+                                text="Birthday" 
+                                value={
+                                    !personDetails.birthday || personDetails.birthday === "" ? (
+                                        <span className="italic text-gray-400">Not Available</span>
+                                    ) : (
+                                        <span>{personDetails.birthday}</span>
+                                    )
+                                } 
+                            />
 
                             {age && (
                                 <DetailsLine 
@@ -97,7 +105,7 @@ async function PersonDetails({ searchParams }: ParamsProps) {
                                 />
                             )}
 
-                            {personDetails.deathday && (
+                            {personDetails.deathday && personDetails.deathday !== "" && (
                                 <DetailsLine 
                                     text="Date of Death" 
                                     value={
@@ -108,12 +116,16 @@ async function PersonDetails({ searchParams }: ParamsProps) {
                                 />
                             )}
 
-                            {personDetails.place_of_birth && (
-                                <DetailsLine 
-                                    text="Place of Birth" 
-                                    value={<span>{personDetails.place_of_birth}</span>} 
-                                />
-                            )}
+                            <DetailsLine 
+                                text="Place of Birth" 
+                                value={
+                                    !personDetails.place_of_birth || personDetails.place_of_birth === "" ? (
+                                        <span className="italic text-gray-400">Not Available</span>
+                                    ) : (
+                                        <span>{personDetails.place_of_birth}</span>
+                                    )
+                                } 
+                            />
 
                             {personDetails.also_known_as && personDetails.also_known_as.length > 0 && (
                                 <DetailsLine 
@@ -128,10 +140,15 @@ async function PersonDetails({ searchParams }: ParamsProps) {
             </div>
 
             {/* Biography */}
-            {personDetails.biography && (
+            {personDetails.biography && personDetails.biography !== "" ? (
                 <div className="my-12 glass-dark rounded-2xl p-8 shadow-xl">
                     <h2 className="text-2xl font-bold text-fuchsia-400 mb-4">Biography</h2>
                     <p className="text-gray-300 text-base leading-relaxed whitespace-pre-line">{personDetails.biography}</p>
+                </div>
+            ) : (
+                <div className="my-12 glass-dark rounded-2xl p-8 shadow-xl">
+                    <h2 className="text-2xl font-bold text-fuchsia-400 mb-4">Biography</h2>
+                    <p className="text-gray-400 italic text-base">No biography available</p>
                 </div>
             )}
 

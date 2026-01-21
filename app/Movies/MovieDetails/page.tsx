@@ -5,6 +5,7 @@ import VideoPlayer from '@/app/components/VideoPlayer';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { MdMovie, MdPeopleAlt, MdMovieFilter } from 'react-icons/md'
+import { getStatusColor } from '@/lib/statusColors'
 
 export const metadata = {
     title: "Movie Details",
@@ -60,24 +61,54 @@ async function MovieDetails({ searchParams }: searchParamsProps) {
                             </h1>
 
                             <div className="space-y-3 md:space-y-4">
-                                <DetailsLine text="Genres" value={movieDetails.genres?.map((gener: any) => (
-                                    <Badge key={gener.id} className="mx-0.5 sm:mx-1 my-0.5 sm:my-1 bg-gradient-to-r from-fuchsia-600/80 to-purple-600/80 text-gray-100 border-white/20 hover:from-fuchsia-500/80 hover:to-purple-500/80">
-                                        {gener.name}
-                                    </Badge>
-                                ))} />
+                                <DetailsLine text="Genres" value={
+                                    !movieDetails.genres || movieDetails.genres.length === 0 ? (
+                                        <span className="italic text-gray-400">Not Available</span>
+                                    ) : (
+                                        movieDetails.genres.map((gener: any) => (
+                                            <Badge key={gener.id} className="mx-0.5 sm:mx-1 my-0.5 sm:my-1 bg-gradient-to-r from-fuchsia-600/80 to-purple-600/80 text-gray-100 border-white/20 hover:from-fuchsia-500/80 hover:to-purple-500/80">
+                                                {gener.name}
+                                            </Badge>
+                                        ))
+                                    )
+                                } />
                                 <DetailsLine text="Rating" value={<Rating rate={movieDetails.vote_average} />} />
-                                <DetailsLine text="Status" value={<span className="font-semibold text-green-400">{movieDetails.status}</span>} />
-                                <DetailsLine text="Languages" value={movieDetails.spoken_languages.map((lang: any) => (
-                                    <span className="px-2" key={lang.iso_639_1}>{lang.name}</span>
-                                ))} />
-                                <DetailsLine text="Countries" value={movieDetails.production_countries.map((country: any) => (
-                                    <span className="px-2" key={country.iso_3166_1}>{country.name}</span>
-                                ))} />
-                                <DetailsLine text="Release Date" value={<span className="font-semibold">{movieDetails.release_date}</span>} />
+                                <DetailsLine text="Status" value={<span className={`font-semibold ${getStatusColor(movieDetails.status, 'movie')}`}>{movieDetails.status}</span>} />
+                                <DetailsLine text="Languages" value={
+                                    !movieDetails.spoken_languages || movieDetails.spoken_languages.length === 0 ? (
+                                        <span className="italic text-gray-400">Not Available</span>
+                                    ) : (
+                                        movieDetails.spoken_languages.map((lang: any) => (
+                                            <span className="px-2" key={lang.iso_639_1}>{lang.name}</span>
+                                        ))
+                                    )
+                                } />
+                                <DetailsLine text="Countries" value={
+                                    !movieDetails.production_countries || movieDetails.production_countries.length === 0 ? (
+                                        <span className="italic text-gray-400">Not Available</span>
+                                    ) : (
+                                        movieDetails.production_countries.map((country: any) => (
+                                            <span className="px-2" key={country.iso_3166_1}>{country.name}</span>
+                                        ))
+                                    )
+                                } />
+                                <DetailsLine text="Release Date" value={
+                                    !movieDetails.release_date || movieDetails.release_date === "" ? (
+                                        <span className="italic text-gray-400">Not Available</span>
+                                    ) : (
+                                        <span className="font-semibold">{movieDetails.release_date}</span>
+                                    )
+                                } />
                                 <DetailsLine 
                                     noLine 
                                     text="Runtime" 
-                                    value={<span className="font-semibold">{movieDetails.runtime} <span className="text-fuchsia-400">mins</span></span>} 
+                                    value={
+                                        !movieDetails.runtime || movieDetails.runtime === 0 ? (
+                                            <span className="italic text-gray-400">Not Available</span>
+                                        ) : (
+                                            <span className="font-semibold">{movieDetails.runtime} <span className="text-fuchsia-400">mins</span></span>
+                                        )
+                                    } 
                                 />
                             </div>
                         </MotionItem>
