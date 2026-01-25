@@ -11,6 +11,7 @@ import SeasonsEpisodes from './SeasonsEpisodes'
 import { TbMovie } from 'react-icons/tb'
 import { FaMasksTheater } from 'react-icons/fa6'
 import { Genre, Movie, TVShowDetails } from '../types'
+import { getGenreName } from '@/lib/genreMap'
 
 export default async function MovieCard({ movie, pageLink, show = false, isSearch = false, isPerson = false, priority = false }: { movie: Movie | TVShowDetails | any, pageLink?: string, show?: boolean, isSearch?: boolean, isPerson?: boolean, priority?: boolean }) {
     // Fetch details only for TV shows to get seasons/episodes count
@@ -101,11 +102,11 @@ export default async function MovieCard({ movie, pageLink, show = false, isSearc
                             )}
                             
                             {/* Genres */}
-                            {movie?.genre_ids && (
+                            {movie?.genre_ids && movie.genre_ids.length > 0 && (
                                 <div className="flex flex-wrap gap-2 justify-center">
                                     {movie.genre_ids.slice(0, 2).map((genreId: number) => (
                                         <Badge key={genreId} className="bg-gradient-to-r from-fuchsia-600/80 to-purple-600/80 text-gray-200 border-white/20 hover:from-fuchsia-500/80 hover:to-purple-500/80">
-                                            {genreId === 28 ? 'Action' : genreId === 12 ? 'Adventure' : genreId === 16 ? 'Animation' : genreId === 35 ? 'Comedy' : genreId === 80 ? 'Crime' : genreId === 18 ? 'Drama' : genreId === 14 ? 'Fantasy' : genreId === 27 ? 'Horror' : genreId === 878 ? 'Sci-Fi' : genreId === 53 ? 'Thriller' : genreId === 10759 ? 'Action' : genreId === 10765 ? 'Sci-Fi' : 'More'}
+                                            {getGenreName(genreId)}
                                         </Badge>
                                     ))}
                                 </div>
