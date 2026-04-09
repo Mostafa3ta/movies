@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import React from 'react'
 import { CastDetails, CustomImg, DetailsLine, Empty, Episodes, GridContainer, MotionItem, Rating, Seasons } from '../../components';
 import { MdPeopleAlt } from 'react-icons/md';

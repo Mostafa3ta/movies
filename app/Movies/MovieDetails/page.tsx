@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import React from 'react'
 import { fetchMovieDetails, fetchMovieCast, fetchMovieRecommend, fetchMovieSimilar } from '@/app/api';
 import { CastDetails, CustomImg, DetailsLine, Empty, GridContainer, MotionItem, Rating, Similar } from '@/app/components';

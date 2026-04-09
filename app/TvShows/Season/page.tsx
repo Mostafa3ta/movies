@@ -1,5 +1,5 @@
+export const runtime = 'edge';
 /* eslint-disable @next/next/no-img-element */
-
 import React from "react";
 import {
   CastDetails,

@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import React from 'react'
 import { Empty, Heading, MoviesWrapper } from '../components'
 import { searchResults } from '../api'

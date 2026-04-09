@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import React from 'react';
 import { Empty, Heading, MotionItem, MoviesWrapper } from '@/app/components';
 import { fetchPeopleLists } from '@/app/api';

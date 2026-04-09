@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import React from 'react'
 import { fetchPersonDetails, fetchPersonCombinedCredits, fetchPersonImages } from '@/app/api'
 import { CustomImg, DetailsLine, Empty, GridContainer, MotionItem, MovieCard } from '@/app/components'

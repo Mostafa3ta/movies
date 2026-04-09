@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import React from 'react';
 import { AdvancedFilters, Empty, Heading, MotionItem, MoviesWrapper } from '@/app/components';
 import { discoverMovies, fetchGenres, fetchMoviesLists } from '@/app/api';
