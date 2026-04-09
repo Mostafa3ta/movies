@@ -8,7 +8,7 @@ export default function Footer() {
   const FooterLinks = [
     {
       name: "Portfolio",
-      link: "https://portfolio2-eosin-six.vercel.app/",
+      link: "https://portfolio-v2-7p0.pages.dev/",
       icon: <IoPersonCircleOutline className="w-6 h-6" />,
     },
     {
